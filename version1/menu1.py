@@ -40,8 +40,8 @@ while op1 != "0":
     
     limpar_tela()
     print("=====================================")
-    print("===          PETPY SHOP          ====")
-    print("=== A melhor opção para o seu pet ===")
+    print("             PETPY SHOP              ")
+    print("    A melhor opção para o seu pet    ")
     print("=====================================")
     print()
     print("\t1 - Cadastre seu Pet")
