@@ -10,7 +10,6 @@ def limpar_tela():
         os.system('clear')
 
 def menuPrincipal():
-    limpar_tela()
     print("=====================================")
     print("             PETPY SHOP              ")
     print("    A melhor opção para o seu pet    ")
@@ -24,6 +23,7 @@ def menuPrincipal():
     print("=====================================")
     print()
     opcao = input("O que você deseja acessar? ")
+    limpar_tela()
     return opcao
 
 ### PROGRAMA ###
@@ -44,4 +44,6 @@ while op1 != "0":
         print("===   OPÇÃO INVÁLIDA   ===")
     input("Tecle ENTER para continuar")
     op1 = menuPrincipal()
+print("Agradecemos pela preferência.")
+print("Esperamos vê-lo novamente!")
 print("Fim")
