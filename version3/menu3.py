@@ -77,6 +77,7 @@ while op1 != "0":
         print("===   OPÇÃO INVÁLIDA   ===")
     input("Tecle ENTER para continuar")
     op1 = menuPrincipal()
+print("Obrigada por acessar a PetPy!")
 print("Agradecemos pela preferência.")
 print("Esperamos vê-lo novamente!")
 print("Fim")
