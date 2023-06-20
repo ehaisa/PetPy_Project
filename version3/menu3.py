@@ -56,6 +56,20 @@ def menuServicos():
     limpar_tela()
     return opcao
 
+def menuAtendimento():
+    print("=====================================")
+    print("             Atendimento             ")
+    print("=====================================")
+    print()
+    print("\t1 - Agende seu Horário")
+    print("\t2 - Fale Conosco")
+    print("\t0 - Menu Principal")
+    print()
+    print("=====================================")
+    opcao = input("Escolha sua opção: ")
+    limpar_tela()
+    return opcao
+
 op1 = menuPrincipal()
 
 while op1 != "0":
@@ -88,8 +102,16 @@ while op1 != "0":
             input("Tecle ENTER para continuar")
             op2 = menuServicos()
     elif op1 == "3":
-        print("===    Agende Aqui     ===")
-        print("=== EM DESENVOLVIMENTO ===")
+        op2 = menuAtendimento()
+        while op2 != "0":
+            if op2 == "1":
+                print("===    Agendamentos    ===")
+                print("=== EM DESENVOLVIMENTO ===")
+            if op2 == "2":
+                print("===    Fale Conosco    ===")
+                print("=== EM DESENVOLVIMENTO ===")
+            input("Tecle ENTER para continuar")
+            op2 = menuAtendimento()
     else:
         print("===   OPÇÃO INVÁLIDA   ===")
     input("Tecle ENTER para continuar")
