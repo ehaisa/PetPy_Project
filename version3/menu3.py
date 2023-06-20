@@ -34,24 +34,27 @@ def petPerfil():
     print("\t1 - Acessar perfil")
     print("\t2 - Cadastro de cliente")
     print("\t3 - Configurações da conta")
-    print("\t0 - Voltar ao Menu Principal")
+    print("\t0 - Menu Principal")
     print()
     print("=====================================")
     opcao = input("Escolha sua opção: ")
     limpar_tela()
     return opcao
 
-def minhaConta():
-    print("===    Minha Conta     ===")
-    print("=== EM DESENVOLVIMENTO ===")
-
-def cadastro():
-    print("===   Crie sua Conta   ===")
-    print("=== EM DESENVOLVIMENTO ===")
-
-def configConta():
-    print("===   Configurações    ===")
-    print("=== EM DESENVOLVIMENTO ===")
+def menuServicos():
+    print("=====================================")
+    print("            Serviços Pet             ")
+    print("=====================================")
+    print()
+    print("\t1 - Banho e Tosa")
+    print("\t2 - Veterinário")
+    print("\t3 - Nossos produtos")
+    print("\t0 - Menu Principal")
+    print()
+    print("=====================================")
+    opcao = input("Escolha sua opção: ")
+    limpar_tela()
+    return opcao
 
 op1 = menuPrincipal()
 
@@ -60,16 +63,30 @@ while op1 != "0":
         op2 = petPerfil()
         while op2 != "0":
             if op2 == "1":
-                minhaConta()
+                print("===    Minha Conta     ===")
+                print("=== EM DESENVOLVIMENTO ===")
             elif op2 == "2":
-                cadastro()
+                print("===   Crie sua Conta   ===")
+                print("=== EM DESENVOLVIMENTO ===")
             elif op2 == "3":
-                configConta()
+                print("===   Configurações    ===")
+                print("=== EM DESENVOLVIMENTO ===")
             input("Tecle ENTER para continuar")
             op2 = petPerfil()
     elif op1 == "2":
-        print("===    Serviços Pet    ===")
-        print("=== EM DESENVOLVIMENTO ===")
+        op2 = menuServicos()
+        while op2 != "0":
+            if op2 == "1":
+                print("===   Banho e Tosa     ===")
+                print("=== EM DESENVOLVIMENTO ===")
+            if op2 == "2":
+                print("===    Veterinário     ===")
+                print("=== EM DESENVOLVIMENTO ===")
+            if op2 == "3":
+                print("===      Produtos      ===")
+                print("=== EM DESENVOLVIMENTO ===")
+            input("Tecle ENTER para continuar")
+            op2 = menuServicos()
     elif op1 == "3":
         print("===    Agende Aqui     ===")
         print("=== EM DESENVOLVIMENTO ===")
