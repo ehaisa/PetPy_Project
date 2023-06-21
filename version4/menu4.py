@@ -97,7 +97,7 @@ def petCadastro():
     print()
     petNome = input("Qual o nome dele? ")
     petTipo = input("Que animal ele é? ")
-    petIdade = int(input("Qual a idade dele? "))
+    petIdade = int(input("Quantos anos ele tem? "))
     petSaude = input("Ele tem alguma condição médica importante de lembrar, como alergias ou doenças? ")
     if petSaude.lower() == "sim":
         petCondicoes = input("Informe a(s) condição(ões) dele: ")
