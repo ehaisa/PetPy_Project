@@ -120,5 +120,5 @@ while op1 != "0":
     op1 = menuPrincipal()
 print("Obrigada por acessar a PetPy!")
 print("Agradecemos pela preferência.")
-print("E esperamos vê-lo novamente!")
+print("Esperamos vê-lo novamente!")
 print("Fim")
