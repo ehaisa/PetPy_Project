@@ -70,6 +70,8 @@ def menuAtendimento():
     limpar_tela()
     return opcao
 
+########## PROGRAMA PRINCIPAL ##########
+
 op1 = menuPrincipal()
 
 while op1 != "0":
