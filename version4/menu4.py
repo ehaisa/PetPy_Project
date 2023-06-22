@@ -1,6 +1,5 @@
 import os
 import platform
-import phonenumbers
 
 pets = {}
 
@@ -34,7 +33,7 @@ def petPerfil():
     print("             Pet Perfil              ")
     print("=====================================")
     print()
-    print("\t1 - Acessar perfil")
+    print("\t1 - Pesquisar perfil")
     print("\t2 - Cadastro de cliente")
     print("\t3 - Configurações da conta")
     print("\t0 - Menu Principal")
@@ -92,12 +91,26 @@ def validarEmail():
             email = input("Digite seu email: ")
             limpar_tela()
 
+def validarNumero():
+    contato = input("Informe um número para contato (ex.: 99 99999-9999): ")
+    contato = contato.replace(" ", "")
+    contato = contato.replace("-", "")
+
+    if len(contato) != 11:
+        print("Número inválido. Por favor, digite novamente.")
+        contato = input("Informe um número para contato (ex.: 99 99999-9999): ")
+    elif contato[2] != "9":
+        print("Número inválido. Por favor, digite novamente.")
+        contato = input("Informe um número para contato (ex.: 99 99999-9999): ")
+    else:
+        print("O cadastro foi realizado com sucesso!")
+
 def petCadastro():
     print("Informe os dados do seu pet:")
     print()
     petNome = input("Qual o nome dele? ")
     petTipo = input("Que animal ele é? ")
-    petIdade = int(input("Quantos anos ele tem? "))
+    petIdade = input("Quantos anos ele tem? ")
     petSaude = input("Ele tem alguma condição médica importante de lembrar, como alergias ou doenças? ")
     if petSaude.lower() == "sim":
         petCondicoes = input("Informe a(s) condição(ões) dele: ")
@@ -106,10 +119,35 @@ def petCadastro():
         print("Agora, para finalizar, informe alguns dados sobre você:")
     donoNome = input("Qual o seu nome? ")
     donoEmail = validarEmail()
-    donoContato = int(input("Informe um telefone para contato: "))
-    pets[petNome] = [petTipo, petIdade, petSaude, donoNome, donoEmail, donoContato]
-    print("O cadastro foi realizado com sucesso! Sejam bem-vindoss %s e %s. "%(donoNome, petNome))
-    limpar_tela()
+    donoContato = validarNumero()
+    pets[petNome] = {
+        "Tipo": petTipo,
+        "Idade": petIdade,
+        "Condições Médicas": petSaude,
+        "Dono": donoNome,
+        "Email": donoEmail,
+        "Contato": donoContato
+    }
+    print("Sejam bem-vindos %s e %s. "%(donoNome, petNome))
+
+def minhaConta():
+        print("=====================================")
+        print("           Pesquisar Perfil          ")
+        print("=====================================")
+        petNome = input("Que perfil você quer acessar? ")
+        if petNome in pets:
+            print("Nome: ", petNome)
+            print("Tipo: ", pets[petNome]["Tipo"])
+            print("Idade: ", pets[petNome]["Idade"])
+            print("Condições Médicas: ", pets[petNome]["Condições Médicas"])
+            print("Dono: ", pets[petNome]["Dono"])
+        else:
+            perfilNone = input("Pet Perfil não encontrado! Quer tentar novamente? ")
+            if perfilNone == "sim":
+                limpar_tela()
+                minhaConta()
+            else:
+                petPerfil()
 
 ########## PROGRAMA PRINCIPAL ##########
 
@@ -120,8 +158,7 @@ while op1 != "0":
         op2 = petPerfil()
         while op2 != "0":
             if op2 == "1":
-                print("===    Minha Conta     ===")
-                print("=== EM DESENVOLVIMENTO ===")
+                minhaConta()
             elif op2 == "2":
                 petCadastro()
             elif op2 == "3":
