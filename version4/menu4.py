@@ -149,6 +149,43 @@ def minhaConta():
             else:
                 petPerfil()
 
+def configConta():
+    print()
+    petNome = input("Que conta você quer editar? ")
+    if petNome in pets:
+        print("= Edição de Conta - %s ="%petNome)
+        print("\t1 - Nome")
+        print("\t2 - Tipo")
+        print("\t3 - Idade")
+        print("\t4 - Condições Médicas")
+        print("\t5 - Dono")
+        print("================================")
+        opcao = input("Escolha a informação que deseja editar: ")
+        if opcao == "1":
+            novoNome = input("Qual o nome dele? ")
+            pets[petNome]["Nome"] = novoNome
+            print("Nome atualizado com sucesso!")
+        elif opcao == "2":
+            novoTipo = input("Que animal ele é? ")
+            pets[petNome]["Tipo"] = novoTipo
+            print("Tipo atualizado com sucesso!")
+        elif opcao == "3":
+            novaIdade = input("Quantos anos ele tem? ")
+            pets[petNome]["Idade"] = novaIdade
+            print("Idade atualizada com sucesso!")
+        elif opcao == "4":
+            novasCondicoes = input("Digite as novas condições médicas: ")
+            pets[petNome]["Condições Médicas"] = novasCondicoes
+            print("Condições médicas atualizadas com sucesso!")
+        elif opcao == "5":
+            novoDono = input("Digite o novo dono: ")
+            pets[petNome]["Dono"] = novoDono
+            print("Dono atualizado com sucesso!")
+        else:
+            print("Opção inválida!")
+    else:
+        print("Perfil não encontrado.")
+
 ########## PROGRAMA PRINCIPAL ##########
 
 op1 = menuPrincipal()
@@ -162,8 +199,7 @@ while op1 != "0":
             elif op2 == "2":
                 petCadastro()
             elif op2 == "3":
-                print("===   Configurações    ===")
-                print("=== EM DESENVOLVIMENTO ===")
+                configConta()
             input("Tecle ENTER para continuar")
             op2 = petPerfil()
     elif op1 == "2":
