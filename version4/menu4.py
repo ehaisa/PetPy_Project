@@ -33,7 +33,7 @@ def petPerfil():
     print("             Pet Perfil              ")
     print("=====================================")
     print()
-    print("\t1 - Pesquisar perfil")
+    print("\t1 - Acessar perfil")
     print("\t2 - Cadastro de cliente")
     print("\t3 - Configurações da conta")
     print("\t0 - Menu Principal")
@@ -132,7 +132,7 @@ def petCadastro():
 
 def minhaConta():
         print("=====================================")
-        print("           Pesquisar Perfil          ")
+        print("            Acessar Perfil           ")
         print("=====================================")
         petNome = input("Que perfil você quer acessar? ")
         if petNome in pets:
