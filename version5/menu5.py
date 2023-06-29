@@ -120,7 +120,7 @@ def petCadastro():
     donoNome = input("Qual o seu nome? ")
     donoEmail = validarEmail()
     donoContato = validarNumero()
-    pets[petNome] = {
+    pets[petNome] = {  ## MUDAR CHAVE !!
         "Tipo": petTipo,
         "Idade": petIdade,
         "Condições Médicas": petSaude,
@@ -136,7 +136,7 @@ def minhaConta():
         print("            Acessar Perfil           ")
         print("=====================================")
         petNome = input("Que perfil você quer acessar? ")
-        if petNome in pets:
+        if petNome in pets:   ## mudar para um laço !!
             print("Nome: ", petNome)
             print("Tipo: ", pets[petNome]["Tipo"])
             print("Idade: ", pets[petNome]["Idade"])
@@ -211,6 +211,17 @@ banhoPrecos = {
     "Banho G": 105,
     "Tosa G": 150
 }
+
+def menuClinica():
+    print("=====================================")
+    print("             Clínica Vet             ")
+    print("=====================================")
+    print()
+
+#vetPrecos = {
+#   "Consulta":
+#   "Exames":
+# }
 
 ########## PROGRAMA PRINCIPAL ##########
 
