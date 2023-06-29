@@ -29,6 +29,7 @@ def menuPrincipal():
     return opcao
 
 def petPerfil():
+    limpar_tela()
     print("=====================================")
     print("             Pet Perfil              ")
     print("=====================================")
@@ -40,7 +41,6 @@ def petPerfil():
     print()
     print("=====================================")
     opcao = input("Escolha sua opção: ")
-    limpar_tela()
     return opcao
 
 def menuServicos():
@@ -131,6 +131,7 @@ def petCadastro():
     print("Sejam bem-vindos %s e %s. "%(donoNome, petNome))
 
 def minhaConta():
+        limpar_tela()
         print("=====================================")
         print("            Acessar Perfil           ")
         print("=====================================")
@@ -159,6 +160,7 @@ def configConta():
         print("\t3 - Idade")
         print("\t4 - Condições Médicas")
         print("\t5 - Dono")
+        print("\t6 - Excluir conta")
         print("================================")
         opcao = input("Escolha a informação que deseja editar: ")
         if opcao == "1":
@@ -181,6 +183,9 @@ def configConta():
             novoDono = input("Digite o novo dono: ")
             pets[petNome]["Dono"] = novoDono
             print("Dono atualizado com sucesso!")
+        elif opcao == "6":
+            del pets[petNome]
+            print("Perfil deletado com sucesso!")
         else:
             print("Opção inválida!")
     else:
