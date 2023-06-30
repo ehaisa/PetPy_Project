@@ -217,11 +217,74 @@ def menuClinica():
     print("             Clínica Vet             ")
     print("=====================================")
     print()
+    print("\t1 - Consultas")
+    print("\t2 - Exames")
+    print("\t3 - Internação")
+    print("\t0 - Voltar aos Serviços")
+    print()
+    print("=====================================")
+    opcao = input("Escolha sua opção: ")
+    limpar_tela()
+    return opcao
 
-#vetPrecos = {
-#   "Consulta":
-#   "Exames":
-# }
+consultaPrecos = {
+   "Consulta de Rotina": 80,
+   "Consulta de Emergência": 120,
+ }
+
+examesPrecos = {
+    "Hemograma completo": 150,
+   "Radiografia simples": 200,
+   "Ultrassonografia": 250,
+   "Electrocardiograma": 180
+}
+
+utiPrecos = {
+    "Diária na enfermaria": 120,
+    "Diária na UTI": 250
+}
+
+def consultasTabela():
+    limpar_tela()
+    print("=====================================")
+    print("             Clínica Vet             ")
+    print("=====================================")
+    print()
+    print("Tabela de Preços de Consulta: ")
+    print()
+    for chave, valor in consultaPrecos.items():
+        print(f"{chave} - {valor:.2f}")
+    print()
+    print("=====================================")
+
+
+def examesTabela():
+    limpar_tela()
+    print("=====================================")
+    print("             Clínica Vet             ")
+    print("=====================================")
+    print()
+    print("Tabela de Preços de Consulta: ")
+    print()
+    for chave, valor in examesPrecos.items():
+        print(f"{chave} - {valor:.2f}")
+    print()
+    print("=====================================")
+
+
+def utiTabela():
+    limpar_tela()
+    print("=====================================")
+    print("             Clínica Vet             ")
+    print("=====================================")
+    print()
+    print("Tabela de Preços de Consulta: ")
+    print()
+    for chave, valor in utiPrecos.items():
+        print(f"{chave} - {valor:.2f}")
+    print()
+    print("=====================================")
+
 
 ########## PROGRAMA PRINCIPAL ##########
 
@@ -245,8 +308,16 @@ while op1 != "0":
             if op2 == "1":
                 menuBanho()
             elif op2 == "2":
-                print("===    Veterinário     ===")
-                print("=== EM DESENVOLVIMENTO ===")
+                op3 = menuClinica()
+                while op3 != "0":
+                    if op3 == "1":
+                        consultasTabela()
+                    elif op3 == "2":
+                        examesTabela()
+                    elif op3 == "3":
+                        utiTabela()
+                    input("Tecle ENTER para continuar")
+                    op3 = menuClinica()
             elif op2 == "3":
                 print("===      Produtos      ===")
                 print("=== EM DESENVOLVIMENTO ===")
