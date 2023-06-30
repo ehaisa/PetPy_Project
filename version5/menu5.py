@@ -196,21 +196,70 @@ def menuBanho():
     print("            Banho e Tosa             ")
     print("=====================================")
     print()
-    print("Nossos Preços: ")
+    print("\t1 - Porte Pequeno")
+    print("\t2 - Porte Médio")
+    print("\t3 - Porte Grande")
+    print("\t0 - Voltar aos Serviços")
     print()
-    for chave, valor in banhoPrecos.items():
+    print("=====================================")
+    opcao = input("Escolha sua opção: ")
+    limpar_tela()
+    return opcao
+
+banhoP = {
+        "Banho Pelo Curto": 50,
+        "Banho Pelo Longo": 55,
+        "Tosa Máquina": 75,
+    }
+
+banhoM = {
+        "Banho Pelo Curto": 60,
+        "Banho Pelo Longo": 70,
+        "Tosa Máquina": 90,
+    }
+
+banhoG = {
+    "Banho Pelo Curto": 95,
+    "Banho Pelo Longo": 115,
+    "Tosa Máquina": 150
+}
+
+def porteP():
+    print("=====================================")
+    print("            Banho e Tosa             ")
+    print("=====================================")
+    print()
+    print("Tabela de Preços - Pequeno Porte ")
+    print()
+    for chave, valor in banhoP.items():
         print(f"{chave} - {valor:.2f}")
     print()
     print("=====================================")
 
-banhoPrecos = {
-    "Banho P": 52,
-    "Tosa P": 75,
-    "Banho M": 65,
-    "Tosa M": 90,
-    "Banho G": 105,
-    "Tosa G": 150
-}
+def porteM():
+    print("=====================================")
+    print("            Banho e Tosa             ")
+    print("=====================================")
+    print()
+    print("Tabela de Preços - Médio Porte ")
+    print()
+    for chave, valor in banhoM.items():
+        print(f"{chave} - {valor:.2f}")
+    print()
+    print("=====================================")
+
+def porteG():
+    print("=====================================")
+    print("            Banho e Tosa             ")
+    print("=====================================")
+    print()
+    print("Tabela de Preços - Grande Porte ")
+    print()
+    for chave, valor in banhoG.items():
+        print(f"{chave} - {valor:.2f}")
+    print()
+    print("=====================================")
+
 
 def menuClinica():
     print("=====================================")
@@ -306,18 +355,27 @@ while op1 != "0":
         op2 = menuServicos()
         while op2 != "0":
             if op2 == "1":
-                menuBanho()
-            elif op2 == "2":
-                op3 = menuClinica()
+                op3 = menuBanho()
                 while op3 != "0":
                     if op3 == "1":
-                        consultasTabela()
+                        porteP()
                     elif op3 == "2":
-                        examesTabela()
+                        porteM()
                     elif op3 == "3":
+                        porteG()
+                    input("Tecle ENTER para continuar")
+                    op3 = menuBanho()
+            elif op2 == "2":
+                op4 = menuClinica()
+                while op4 != "0":
+                    if op4 == "1":
+                        consultasTabela()
+                    elif op4 == "2":
+                        examesTabela()
+                    elif op4 == "3":
                         utiTabela()
                     input("Tecle ENTER para continuar")
-                    op3 = menuClinica()
+                    op4 = menuClinica()
             elif op2 == "3":
                 print("===      Produtos      ===")
                 print("=== EM DESENVOLVIMENTO ===")
