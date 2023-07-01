@@ -146,7 +146,7 @@ def petCadastro():
     print("Sejam bem-vindos %s e %s. "%(donoNome, petNome))
 
 def minhaConta():
-        while True:
+        while True: # MODIFICAÇÃO FEITA: LAÇO COLOCADO PARA MELHOR ESPORNSIVIDADE
             limpar_tela()
             print("=====================================")
             print("            Acessar Perfil           ")
@@ -197,7 +197,7 @@ def configConta():
                 print("================================")
                 opcao = input("Escolha a informação que deseja editar: ")
                 if opcao == "1":
-                    novoNome = input("Qual o nome dele? ")
+                    novoNome = input("Qual o novo nome dele? ")
                     pet["Nome"] = novoNome
                     print("Nome atualizado com sucesso!")
                 elif opcao == "2":
