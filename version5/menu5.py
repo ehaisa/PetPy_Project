@@ -172,44 +172,60 @@ def minhaConta():
 
 def configConta():
     print()
-    petNome = input("Que conta você quer editar? ")
-    if petNome in pets:
-        print("= Edição de Conta - %s ="%petNome)
-        print("\t1 - Nome")
-        print("\t2 - Tipo")
-        print("\t3 - Idade")
-        print("\t4 - Condições Médicas")
-        print("\t5 - Dono")
-        print("\t6 - Excluir conta")
-        print("================================")
-        opcao = input("Escolha a informação que deseja editar: ")
-        if opcao == "1":
-            novoNome = input("Qual o nome dele? ")
-            pets[petNome]["Nome"] = novoNome
-            print("Nome atualizado com sucesso!")
-        elif opcao == "2":
-            novoTipo = input("Que animal ele é? ")
-            pets[petNome]["Tipo"] = novoTipo
-            print("Tipo atualizado com sucesso!")
-        elif opcao == "3":
-            novaIdade = input("Quantos anos ele tem? ")
-            pets[petNome]["Idade"] = novaIdade
-            print("Idade atualizada com sucesso!")
-        elif opcao == "4":
-            novasCondicoes = input("Digite as novas condições médicas: ")
-            pets[petNome]["Condições Médicas"] = novasCondicoes
-            print("Condições médicas atualizadas com sucesso!")
-        elif opcao == "5":
-            novoDono = input("Digite o novo dono: ")
-            pets[petNome]["Dono"] = novoDono
-            print("Dono atualizado com sucesso!")
-        elif opcao == "6":
-            del pets[petNome]
-            print("Perfil deletado com sucesso!")
-        else:
-            print("Opção inválida!")
+    donoEmail = input("Digite seu e-mail: ")
+    if donoEmail in pets:
+        dono = pets[donoEmail]
+        print("== Perfis Encontrados nesta Conta == ")
+        print("=====================================")
+        print()
+        for pet in dono["Pets"]:
+            print(pet["Nome"])
+        print()
+        print("=====================================")
+
+        petNome = input("Qual pet você deseja editar? ")
+
+        for pet in dono["Pets"]:
+            if pet["Nome"] == petNome:
+                print("=        Editando Conta        =")
+                print("\t1 - Nome")
+                print("\t2 - Tipo")
+                print("\t3 - Idade")
+                print("\t4 - Condições Médicas")
+                print("\t5 - Dono")
+                print("\t6 - Excluir conta")
+                print("================================")
+                opcao = input("Escolha a informação que deseja editar: ")
+                if opcao == "1":
+                    novoNome = input("Qual o nome dele? ")
+                    pet["Nome"] = novoNome
+                    print("Nome atualizado com sucesso!")
+                elif opcao == "2":
+                    novoTipo = input("Que animal ele é? ")
+                    pet["Tipo"] = novoTipo
+                    print("Tipo atualizado com sucesso!")
+                elif opcao == "3":
+                    novaIdade = input("Quantos anos ele tem? ")
+                    pet["Idade"] = novaIdade
+                    print("Idade atualizada com sucesso!")
+                elif opcao == "4":
+                    novasCondicoes = input("Digite as novas condições médicas: ")
+                    pet["Condições Médicas"] = novasCondicoes
+                    print("Condições médicas atualizadas com sucesso!")
+                elif opcao == "5":
+                    novoDono = input("Digite o novo dono: ")
+                    pet["Dono"] = novoDono
+                    print("Dono atualizado com sucesso!")
+                elif opcao == "6":
+                    dono["Pets"].remove(pet)
+                    print("Perfil deletado com sucesso!")
+                else:
+                    print("Opção inválida!")
+                break
+            else:
+                print("Perfil não encontrado")
     else:
-        print("Perfil não encontrado.")
+        print("Dono não encontrado.")
 
 def menuBanho():
     print("=====================================")
