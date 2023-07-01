@@ -349,7 +349,7 @@ def examesTabela():
     print("             Clínica Vet             ")
     print("=====================================")
     print()
-    print("Tabela de Preços de Consulta: ")
+    print("Tabela de Preços de Exames: ")
     print()
     for chave, valor in examesPrecos.items():
         print(f"{chave} - {valor:.2f}")
@@ -363,7 +363,7 @@ def utiTabela():
     print("             Clínica Vet             ")
     print("=====================================")
     print()
-    print("Tabela de Preços de Consulta: ")
+    print("Tabela de Preços de Internação: ")
     print()
     for chave, valor in utiPrecos.items():
         print(f"{chave} - {valor:.2f}")
