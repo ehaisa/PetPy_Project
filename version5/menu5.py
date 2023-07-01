@@ -383,7 +383,7 @@ def menuProdutos():
     print("\t0 - Menu Principal")
     print()
     print("=====================================")
-    opcao = input("Escolha sua opção:")
+    opcao = input("Escolha sua opção: ")
     return opcao
 
 comidaGatos = {
@@ -427,7 +427,7 @@ def comidasOpcoes():
     print("\t0 - Voltar aos Produtos")
     print()
     print("=====================================")
-    opcao = input("Escolha sua opção:")
+    opcao = input("Escolha sua opção: ")
     return opcao
 
 def opcoesGato():
