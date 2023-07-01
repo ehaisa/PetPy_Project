@@ -523,7 +523,7 @@ while op1 != "0":
                         utiTabela()
                     input("Tecle ENTER para continuar")
                     op4 = menuClinica()
-            elif op2 == "3": # FALTA AJUSTAR PARA APARECER OS PRODUTOS
+            elif op2 == "3":
                 op5 = menuProdutos()
                 while op5 != "0":
                     if op5 == "1":
