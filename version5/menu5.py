@@ -79,7 +79,7 @@ def validarEmail():
             arroba = email.index("@")
             ponto = email.index(".")
             if arroba > 0 and arroba < len(email) - 1 and ponto > (arroba + 1) and len(email) - ponto >= 3:
-                break
+                return email
             else:
                 print("O e-mail é inválido. Por favor, digite novamente.")
                 print()
@@ -89,21 +89,22 @@ def validarEmail():
             print("O e-mail é inválido. Por favor, digite novamente.")
             print()
             email = input("Digite seu email: ")
-            limpar_tela()
+            limpar_tela() 
 
 def validarNumero():
-    contato = input("Informe um número para contato (ex.: 99 99999-9999): ")
+    contato = input("Informe um número para contato: ")
     contato = contato.replace(" ", "")
     contato = contato.replace("-", "")
 
     if len(contato) != 11:
         print("Número inválido. Por favor, digite novamente.")
-        contato = input("Informe um número para contato (ex.: 99 99999-9999): ")
+        contato = input("Informe um número para contato: ")
     elif contato[2] != "9":
         print("Número inválido. Por favor, digite novamente.")
-        contato = input("Informe um número para contato (ex.: 99 99999-9999): ")
+        contato = input("Informe um número para contato: ")
     else:
         print("O cadastro foi realizado com sucesso!")
+        return contato
 
 def petCadastro():
     print("Informe os dados do seu pet:")
@@ -117,38 +118,57 @@ def petCadastro():
         print("Agora, para finalizar, informe alguns dados sobre você: ")
     else:
         print("Agora, para finalizar, informe alguns dados sobre você:")
+
     donoNome = input("Qual o seu nome? ")
     donoEmail = validarEmail()
     donoContato = validarNumero()
-    pets[petNome] = {  ## MUDAR CHAVE !!
+
+    if donoEmail in pets:
+        pets[donoEmail]["Pets"].append({
+        "Nome": petNome,
         "Tipo": petTipo,
         "Idade": petIdade,
-        "Condições Médicas": petSaude,
+        "Condições Médicas": petSaude
+        })
+    else:
+        pets[donoEmail] = {
         "Dono": donoNome,
         "Email": donoEmail,
-        "Contato": donoContato
-    }
+        "Contato": donoContato,
+        "Pets": [{
+            "Nome": petNome,
+            "Tipo": petTipo,
+            "Idade": petIdade,
+            "Condições Médicas": petSaude
+            }]
+        }
+
     print("Sejam bem-vindos %s e %s. "%(donoNome, petNome))
 
 def minhaConta():
-        limpar_tela()
-        print("=====================================")
-        print("            Acessar Perfil           ")
-        print("=====================================")
-        petNome = input("Que perfil você quer acessar? ")
-        if petNome in pets:   ## mudar para um laço !!
-            print("Nome: ", petNome)
-            print("Tipo: ", pets[petNome]["Tipo"])
-            print("Idade: ", pets[petNome]["Idade"])
-            print("Condições Médicas: ", pets[petNome]["Condições Médicas"])
-            print("Dono: ", pets[petNome]["Dono"])
-        else:
-            perfilNone = input("Pet Perfil não encontrado! Quer tentar novamente? ")
-            if perfilNone == "sim":
-                limpar_tela()
-                minhaConta()
+        while True:
+            limpar_tela()
+            print("=====================================")
+            print("            Acessar Perfil           ")
+            print("=====================================")
+            donoEmail = input("Digite seu e-mail: ")
+            if donoEmail in pets:
+                dono = pets[donoEmail]
+                print("Dono: ", dono["Dono"])
+                print("Contato: ", dono["Contato"])
+                print("Pets:")
+                for pet in dono["Pets"]:
+                    print("Nome: ", pet["Nome"])
+                    print("Tipo: ", pet["Tipo"])
+                    print("Idade: ", pet["Idade"])
+                    print("Condições Médicas: ", pet["Condições Médicas"])
+                break
             else:
-                petPerfil()
+                limpar_tela()
+                print("Perfil não encontrado! Certifique-se que o e-mail foi digitado corretamente.")
+                resp = input("Quer tentar novamente? ").lower()
+                if resp != "sim":
+                    break
 
 def configConta():
     print()
