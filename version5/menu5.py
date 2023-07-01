@@ -123,7 +123,7 @@ def petCadastro():
     donoEmail = validarEmail()
     donoContato = validarNumero()
 
-    if donoEmail in pets:
+    if donoEmail in pets: # MODIFICAÇÃO FEITA: CHAVE MUDADA E POSSIBILIDADE DE MULTIPLOS PETS POR DONO
         pets[donoEmail]["Pets"].append({
         "Nome": petNome,
         "Tipo": petTipo,
@@ -146,7 +146,7 @@ def petCadastro():
     print("Sejam bem-vindos %s e %s. "%(donoNome, petNome))
 
 def minhaConta():
-        while True: # MODIFICAÇÃO FEITA: LAÇO COLOCADO PARA MELHOR ESPORNSIVIDADE
+        while True: # MODIFICAÇÃO FEITA: LAÇO COLOCADO PARA MELHOR RESPONSIVIDADE
             limpar_tela()
             print("=====================================")
             print("            Acessar Perfil           ")
@@ -170,7 +170,7 @@ def minhaConta():
                 if resp != "sim":
                     break
 
-def configConta():
+def configConta(): # MODIFICAÇÃO FEITA: CHAVE MUDADA E EDIÇÃO DE CADA PET
     print()
     donoEmail = input("Digite seu e-mail: ")
     if donoEmail in pets:
