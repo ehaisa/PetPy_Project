@@ -370,6 +370,120 @@ def utiTabela():
     print()
     print("=====================================")
 
+def menuProdutos():
+    limpar_tela()
+    print("=====================================")
+    print("           Nossos Produtos           ")
+    print("=====================================")
+    print()
+    print("\t1 - Alimentação")
+    print("\t2 - Higiene")
+    print("\t3 - Acessórios")
+    print("\t0 - Menu Principal")
+    print()
+    print("=====================================")
+    opcao = input("Escolha sua opção:")
+    return opcao
+
+comidaGatos = {
+    "Ração 1kg": 26.90,
+    "Ração 3kg": 61.90,
+    "Ração 10kg": 150.90,
+    "Sachê 100g": 3.00
+}
+
+comidaCaes = {
+    "Ração 1kg": 22.99,
+    "Ração 3kg": 54.90,
+    "Ração 15kg": 169.99,
+    "Biscoito 250g": 16.40
+}
+
+higienePrecos = {
+    "Shampoo (Cães e Gatos) 200ml": 79.99,
+    "Areia para Gatos 1,6kg": 50.99,
+    "Caixa sanitária para gatos": 35.00,
+    "Coleira antipulgas": 25.90,
+    "Escova para pelos": 12.99
+}
+
+acessorioPrecos = {
+    "Coleira Ajustável": 25.00,
+    "Guia de Passeio": 30.00,
+    "Comedouro e Bebedouro (aço inoxidável)": 30.00,
+    "Cama para pet": 50.00,
+    "Caixa transportadora": 60.00
+}
+
+def comidasOpcoes():
+    limpar_tela()
+    print("=====================================")
+    print("           Nossos Produtos           ")
+    print("=====================================")
+    print()
+    print("\t1 - Alimentação para Gatos")
+    print("\t2 - Alimentação para Cães")
+    print("\t0 - Voltar aos Produtos")
+    print()
+    print("=====================================")
+    opcao = input("Escolha sua opção:")
+    return opcao
+
+def opcoesGato():
+    limpar_tela()
+    print("=====================================")
+    print("           Nossos Produtos           ")
+    print("=====================================")
+    print()
+    print("Tabela de Preços: ")
+    print()
+    for chave, valor in comidaGatos.items():
+        print(f"{chave} - {valor}")
+    print("=====================================")
+    opcao = input("Escolha sua opção:")
+    return opcao
+
+def opcoesCao():
+    limpar_tela()
+    print("=====================================")
+    print("           Nossos Produtos           ")
+    print("=====================================")
+    print()
+    print("Tabela de Preços: ")
+    print()
+    for chave, valor in comidaCaes.items():
+        print(f"{chave} - {valor}")
+    print("=====================================")
+    opcao = input("Escolha sua opção:")
+    return opcao
+
+def higieneTabela():
+    limpar_tela()
+    print("=====================================")
+    print("           Nossos Produtos           ")
+    print("=====================================")
+    print()
+    print("Tabela de Preços: ")
+    print()
+    for chave, valor in higienePrecos.items():
+        print(f"{chave} - {valor}")
+    print("=====================================")
+    opcao = input("Escolha sua opção:")
+    return opcao
+
+def acessoriosTabela():
+    limpar_tela()
+    print("=====================================")
+    print("           Nossos Produtos           ")
+    print("=====================================")
+    print()
+    print("Tabela de Preços: ")
+    print()
+    for chave, valor in acessorioPrecos.items():
+        print(f"{chave} - {valor}")
+    print("=====================================")
+    opcao = input("Escolha sua opção:")
+    return opcao
 
 ########## PROGRAMA PRINCIPAL ##########
 
@@ -412,7 +526,7 @@ while op1 != "0":
                         utiTabela()
                     input("Tecle ENTER para continuar")
                     op4 = menuClinica()
-            elif op2 == "3":
+            elif op2 == "3": # FALTA AJUSTAR PARA APARECER OS PRODUTOS
                 print("===      Produtos      ===")
                 print("=== EM DESENVOLVIMENTO ===")
             input("Tecle ENTER para continuar")
