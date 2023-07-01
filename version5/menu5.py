@@ -370,6 +370,7 @@ def utiTabela():
     print()
     print("=====================================")
 
+
 def menuProdutos():
     limpar_tela()
     print("=====================================")
@@ -439,9 +440,8 @@ def opcoesGato():
     print()
     for chave, valor in comidaGatos.items():
         print(f"{chave} - {valor}")
+    print()
     print("=====================================")
-    opcao = input("Escolha sua opção:")
-    return opcao
 
 def opcoesCao():
     limpar_tela()
@@ -453,9 +453,8 @@ def opcoesCao():
     print()
     for chave, valor in comidaCaes.items():
         print(f"{chave} - {valor}")
+    print()
     print("=====================================")
-    opcao = input("Escolha sua opção:")
-    return opcao
 
 def higieneTabela():
     limpar_tela()
@@ -467,9 +466,8 @@ def higieneTabela():
     print()
     for chave, valor in higienePrecos.items():
         print(f"{chave} - {valor}")
+    print()
     print("=====================================")
-    opcao = input("Escolha sua opção:")
-    return opcao
 
 def acessoriosTabela():
     limpar_tela()
@@ -481,9 +479,8 @@ def acessoriosTabela():
     print()
     for chave, valor in acessorioPrecos.items():
         print(f"{chave} - {valor}")
+    print()
     print("=====================================")
-    opcao = input("Escolha sua opção:")
-    return opcao
 
 ########## PROGRAMA PRINCIPAL ##########
 
@@ -527,8 +524,23 @@ while op1 != "0":
                     input("Tecle ENTER para continuar")
                     op4 = menuClinica()
             elif op2 == "3": # FALTA AJUSTAR PARA APARECER OS PRODUTOS
-                print("===      Produtos      ===")
-                print("=== EM DESENVOLVIMENTO ===")
+                op5 = menuProdutos()
+                while op5 != "0":
+                    if op5 == "1":
+                        op6 = comidasOpcoes()
+                        while op6 != "0":
+                            if op6 == "1":
+                                opcoesGato()
+                            elif op6 == "2":
+                                opcoesCao()
+                            input("Tecle ENTER para continuar")
+                            op6 = comidasOpcoes()
+                    elif op5 == "2":
+                        higieneTabela()
+                    elif op5 == "3":
+                        acessoriosTabela()
+                    input("Tecle ENTER para continuar")
+                    op5 = menuProdutos()
             input("Tecle ENTER para continuar")
             op2 = menuServicos()
     elif op1 == "3":
