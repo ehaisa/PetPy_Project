@@ -117,6 +117,7 @@ def petCadastro():
         petCondicoes = input("Informe a(s) condição(ões) dele: ")
         print("Agora, para finalizar, informe alguns dados sobre você: ")
     else:
+        petCondicoes = "Nenhuma"
         print("Agora, para finalizar, informe alguns dados sobre você:")
 
     donoNome = input("Qual o seu nome? ")
@@ -128,7 +129,7 @@ def petCadastro():
         "Nome": petNome,
         "Tipo": petTipo,
         "Idade": petIdade,
-        "Condições Médicas": petSaude
+        "Condições Médicas": petCondicoes
         })
     else:
         pets[donoEmail] = {
@@ -139,7 +140,7 @@ def petCadastro():
             "Nome": petNome,
             "Tipo": petTipo,
             "Idade": petIdade,
-            "Condições Médicas": petSaude
+            "Condições Médicas": petCondicoes
             }]
         }
 
