@@ -1,5 +1,6 @@
 import os
 import platform
+from datetime import datetime, time
 
 pets = {}
 
@@ -64,7 +65,7 @@ def menuAtendimento():
     print("=====================================")
     print()
     print("\t1 - Agende seu Horário")
-    print("\t2 - Fale Conosco")
+    print("\t2 - Sobre nós")
     print("\t0 - Menu Principal")
     print()
     print("=====================================")
@@ -483,6 +484,50 @@ def acessoriosTabela():
     print()
     print("=====================================")
 
+agendamentos = {}
+
+def agendarHorario():
+    print("=====================================")
+    print("             Agendamento             ")
+    print("=====================================")
+    print()
+    donoEmail = input("Informe seu e-mail: ")
+    if donoEmail in pets:
+        dono = pets[donoEmail]
+        print("== Perfis Encontrados nesta Conta == ")
+        print("=====================================")
+        print()
+        for pet in dono["Pets"]:
+            print(pet["Nome"])
+        print()
+        print("=====================================")
+        petNome = input("Para qual pet será o agendamento? ")
+        for pet in dono["Pets"]:
+            if pet["Nome"] == petNome:
+                servicoVet = input("Para qual serviço você deseja agendar um horário? ")
+                dataVet = input("Informe a datadesejada (dd/mm/aa): ")
+                horaVet = input("Informe a hora desejada (hh:mm): ")
+                
+                try:
+                    convData = datetime.strptime(dataVet, "%d/%m/%Y")
+                    convHora = datetime.strptime(horaVet, "%H:%M")
+                except:
+                    print("Data ou Horário inválido.")
+                    return
+                
+                dataCerta = convData.strftime("%d/%m/%Y")
+                
+                if donoEmail not in agendamentos:
+                    agendamentos[donoEmail] = []
+                    agendamentos[donoEmail].append({
+                        "Paciente": petNome,
+                        "Serviço": servicoVet,
+                        "Data": dataCerta,
+                        "Horário": horaVet
+                    })
+                print("Horário agendado com sucesso.!")
+                return
+    print("Perfil não encontrado ou informações inválidas.")
 ########## PROGRAMA PRINCIPAL ##########
 
 op1 = menuPrincipal()
