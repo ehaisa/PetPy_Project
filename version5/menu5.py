@@ -19,7 +19,7 @@ def menuPrincipal():
     print("    A melhor opção para o seu pet    ")
     print("=====================================")
     print()
-    print("\t1 - Cadastre seu Pet")
+    print("\t1 - Área do Cliente")
     print("\t2 - Nossos Serviços")
     print("\t3 - Atendimento")
     print("\t0 - Finalizar Programa")
@@ -158,7 +158,7 @@ def minhaConta():
                 dono = pets[donoEmail]
                 print("Dono: ", dono["Dono"])
                 print("Contato: ", dono["Contato"])
-                print("Pets:")
+                print("Pets ")
                 for pet in dono["Pets"]:
                     print("Nome: ", pet["Nome"])
                     print("Tipo: ", pet["Tipo"])
