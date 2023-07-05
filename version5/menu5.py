@@ -300,6 +300,7 @@ def porteG():
 
 
 def menuClinica():
+    limpar_tela()
     print("=====================================")
     print("             Clínica Vet             ")
     print("=====================================")
@@ -311,7 +312,6 @@ def menuClinica():
     print()
     print("=====================================")
     opcao = input("Escolha sua opção: ")
-    limpar_tela()
     return opcao
 
 consultaPrecos = {
@@ -506,6 +506,7 @@ def agendarHorario():
     print("O intervalo de tempo entre cada horário é de 30 minutos.")
     print()
     donoEmail = input("Informe seu e-mail: ")
+
     if donoEmail in pets:
         dono = pets[donoEmail]
         print("== Perfis Encontrados nesta Conta == ")
@@ -527,17 +528,23 @@ def agendarHorario():
                 if clinicaHorarios(agendarHora):
                     if donoEmail not in agendamentos:
                         agendamentos[donoEmail] = []
-                        agendamentos[donoEmail].append({
-                            "Paciente": petNome,
-                            "Serviço": servicoVet,
-                            "Data": dataVet,
-                            "Horário": agendarHora
-                        })
-                        print("Horário agendado com sucesso.!")
+                    agendamentos[donoEmail].append({
+                        "Paciente": petNome,
+                        "Serviço": servicoVet,
+                        "Data": dataVet,
+                        "Horário": agendarHora
+                    })
+                    print("Horário agendado com sucesso.!")
+                    return agendamentos[donoEmail]
                 else:
-                    print("Horário inválido. Por favor, lembre-se de escolher um horário de funcionamento")
-                return
-    print("Perfil não encontrado ou informações inválidas.")
+                    print("Horário inválido. Por favor, tente novamente.")
+                return None
+            else:
+                print("Pet não encontrado.")
+    else:
+        print("Perfil não encontrado.")
+    return agendamentos[donoEmail]
+
 ########## PROGRAMA PRINCIPAL ##########
 
 op1 = menuPrincipal()
@@ -603,8 +610,8 @@ while op1 != "0":
         op2 = menuAtendimento()
         while op2 != "0":
             if op2 == "1":
-                print("===    Agendamentos    ===")
-                print("=== EM DESENVOLVIMENTO ===")
+                agendarHorario()
+            input("Tecle ENTER para continuar")
             if op2 == "2":
                 print("===    Fale Conosco    ===")
                 print("=== EM DESENVOLVIMENTO ===")
