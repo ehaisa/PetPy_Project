@@ -13,6 +13,7 @@ def limpar_tela():
         os.system('clear')
 
 def menuPrincipal():
+    limpar_tela()
     print("=====================================")
     print("             PETPY SHOP              ")
     print("    A melhor opção para o seu pet    ")
@@ -26,7 +27,6 @@ def menuPrincipal():
     print("=====================================")
     print()
     opcao = input("O que você deseja acessar? ")
-    limpar_tela()
     return opcao
 
 def petPerfil():
@@ -45,6 +45,7 @@ def petPerfil():
     return opcao
 
 def menuServicos():
+    limpar_tela()
     print("=====================================")
     print("            Serviços Pet             ")
     print("=====================================")
@@ -56,10 +57,10 @@ def menuServicos():
     print()
     print("=====================================")
     opcao = input("Escolha sua opção: ")
-    limpar_tela()
     return opcao
 
 def menuAtendimento():
+    limpar_tela()
     print("=====================================")
     print("             Atendimento             ")
     print("=====================================")
@@ -70,7 +71,6 @@ def menuAtendimento():
     print()
     print("=====================================")
     opcao = input("Escolha sua opção: ")
-    limpar_tela()
     return opcao
 
 def validarEmail():
@@ -173,6 +173,7 @@ def minhaConta():
                     break
 
 def configConta(): # MODIFICAÇÃO FEITA: CHAVE MUDADA E EDIÇÃO DE CADA PET
+    limpar_tela()
     print()
     donoEmail = input("Digite seu e-mail: ")
     if donoEmail in pets:
@@ -230,6 +231,7 @@ def configConta(): # MODIFICAÇÃO FEITA: CHAVE MUDADA E EDIÇÃO DE CADA PET
         print("Dono não encontrado.")
 
 def menuBanho():
+    limpar_tela()
     print("=====================================")
     print("            Banho e Tosa             ")
     print("=====================================")
@@ -241,7 +243,6 @@ def menuBanho():
     print()
     print("=====================================")
     opcao = input("Escolha sua opção: ")
-    limpar_tela()
     return opcao
 
 banhoP = {
@@ -263,6 +264,7 @@ banhoG = {
 }
 
 def porteP():
+    limpar_tela()
     print("=====================================")
     print("            Banho e Tosa             ")
     print("=====================================")
@@ -275,6 +277,7 @@ def porteP():
     print("=====================================")
 
 def porteM():
+    limpar_tela()
     print("=====================================")
     print("            Banho e Tosa             ")
     print("=====================================")
@@ -287,6 +290,7 @@ def porteM():
     print("=====================================")
 
 def porteG():
+    limpar_tela()
     print("=====================================")
     print("            Banho e Tosa             ")
     print("=====================================")
