@@ -486,15 +486,16 @@ def acessoriosTabela():
 
 agendamentos = {}
 
-def clinicaAberta(hora):
+def clinicaHorarios(hora):
     manhaAbre = time(7, 30)
     manhaFecha = time(11, 30)
     tardeAbre = time(14, 0)
     tardeFecha = time(18, 0)
-    if manhaAbre <= hora <= manhaFecha or tardeAbre <= hora <= tardeFecha:
-        return True
-    else:
-        return False
+    
+    if (manhaAbre <= hora <= manhaFecha) or (tardeAbre <= hora <= tardeFecha):
+        if hora.minute % 30 == 0:
+            return True
+    return False
 
 def agendarHorario():
     print("=====================================")
@@ -518,23 +519,16 @@ def agendarHorario():
                 dataVet = input("Informe a datadesejada (dd/mm/aa): ")
                 horaVet = input("Informe a hora desejada (hh:mm): ")
                 
-                try:
-                    convData = datetime.strptime(dataVet, "%d/%m/%Y")
-                    convHora = datetime.strptime(horaVet, "%H:%M")
-                except:
-                    print("Data ou Horário inválido.")
-                    return
-                
-                dataCerta = convData.strftime("%d/%m/%Y")
-                
-                if donoEmail not in agendamentos:
-                    agendamentos[donoEmail] = []
-                    agendamentos[donoEmail].append({
-                        "Paciente": petNome,
-                        "Serviço": servicoVet,
-                        "Data": dataCerta,
-                        "Horário": horaVet
-                    })
+                agendarHora = datetime.strptime(horaVet, "%H:%M").time()
+                if clinicaHorarios(agendarHora):
+                    if donoEmail not in agendamentos:
+                        agendamentos[donoEmail] = []
+                        agendamentos[donoEmail].append({
+                            "Paciente": petNome,
+                            "Serviço": servicoVet,
+                            "Data": dataVet,
+                            "Horário": agendarHora
+                        })
                 print("Horário agendado com sucesso.!")
                 return
     print("Perfil não encontrado ou informações inválidas.")
