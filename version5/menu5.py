@@ -491,7 +491,7 @@ def clinicaHorarios(hora):
     manhaFecha = time(11, 30)
     tardeAbre = time(14, 0)
     tardeFecha = time(18, 0)
-    
+
     if (manhaAbre <= hora <= manhaFecha) or (tardeAbre <= hora <= tardeFecha):
         if hora.minute % 30 == 0:
             return True
@@ -501,6 +501,9 @@ def agendarHorario():
     print("=====================================")
     print("             Agendamento             ")
     print("=====================================")
+    print()
+    print("Lembre-se de checar nossos horários de funcionamento!")
+    print("O intervalo de tempo entre cada horário é de 30 minutos.")
     print()
     donoEmail = input("Informe seu e-mail: ")
     if donoEmail in pets:
@@ -520,6 +523,7 @@ def agendarHorario():
                 horaVet = input("Informe a hora desejada (hh:mm): ")
                 
                 agendarHora = datetime.strptime(horaVet, "%H:%M").time()
+
                 if clinicaHorarios(agendarHora):
                     if donoEmail not in agendamentos:
                         agendamentos[donoEmail] = []
@@ -529,7 +533,9 @@ def agendarHorario():
                             "Data": dataVet,
                             "Horário": agendarHora
                         })
-                print("Horário agendado com sucesso.!")
+                        print("Horário agendado com sucesso.!")
+                else:
+                    print("Horário inválido. Por favor, lembre-se de escolher um horário de funcionamento")
                 return
     print("Perfil não encontrado ou informações inválidas.")
 ########## PROGRAMA PRINCIPAL ##########
