@@ -190,13 +190,15 @@ def configConta(): # MODIFICAÇÃO FEITA: CHAVE MUDADA E EDIÇÃO DE CADA PET
 
         for pet in dono["Pets"]:
             if pet["Nome"] == petNome:
-                print("=        Editando Conta        =")
+                print("======== Editando Conta ========")
+                print()
                 print("\t1 - Nome")
                 print("\t2 - Tipo")
                 print("\t3 - Idade")
                 print("\t4 - Condições Médicas")
                 print("\t5 - Dono")
                 print("\t6 - Excluir conta")
+                print()
                 print("================================")
                 opcao = input("Escolha a informação que deseja editar: ")
                 if opcao == "1":
@@ -501,6 +503,13 @@ def clinicaHorarios(hora):
             return True
     return False
 
+def clinicaDias(data):
+    diaFunciona = data.weekday()
+    if 0 <= diaFunciona <= 5:
+        return True
+    else:
+        return False
+
 def agendarHorario():
     print("=====================================")
     print("             Agendamento             ")
@@ -527,9 +536,10 @@ def agendarHorario():
                 dataVet = input("Informe a datadesejada (dd/mm/aa): ")
                 horaVet = input("Informe a hora desejada (hh:mm): ")
                 
+                agendarData = datetime.strptime(dataVet, "%d/%m/%y").date()
                 agendarHora = datetime.strptime(horaVet, "%H:%M").time()
 
-                if clinicaHorarios(agendarHora):
+                if clinicaHorarios(agendarHora) and clinicaDias(agendarData):
                     if donoEmail not in agendamentos:
                         agendamentos[donoEmail] = []
                     agendamentos[donoEmail].append({
@@ -541,13 +551,12 @@ def agendarHorario():
                     print("Horário agendado com sucesso.!")
                     return agendamentos[donoEmail]
                 else:
-                    print("Horário inválido. Por favor, tente novamente.")
+                    print("Dia ou horário inválido. Por favor, tente novamente.")
                 return None
             else:
                 print("Pet não encontrado.")
     else:
         print("Perfil não encontrado.")
-    return agendamentos[donoEmail]
 
 ########## PROGRAMA PRINCIPAL ##########
 
@@ -615,7 +624,6 @@ while op1 != "0":
         while op2 != "0":
             if op2 == "1":
                 agendarHorario()
-            input("Tecle ENTER para continuar")
             if op2 == "2":
                 print("===    Fale Conosco    ===")
                 print("=== EM DESENVOLVIMENTO ===")
