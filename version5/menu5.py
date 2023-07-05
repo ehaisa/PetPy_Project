@@ -558,6 +558,8 @@ def agendarHorario():
     else:
         print("Perfil não encontrado.")
 
+# FALTA CRIAR FUNÇÃO DE VISUALIZAR AGENDAMENTO E EDITAR AGENDAMENTO.
+
 ########## PROGRAMA PRINCIPAL ##########
 
 op1 = menuPrincipal()
