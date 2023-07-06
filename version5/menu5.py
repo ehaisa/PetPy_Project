@@ -686,7 +686,7 @@ def contatoInfo():
     print("Fale conosco: (84) 1 1122-3344")
     print("=====================================")
 
-# FALTA CRIAR FUNÇÃO DE VISUALIZAR AGENDAMENTO E EDITAR AGENDAMENTO.
+# FALTA CRIAR FUNÇÃO DE VISUALIZAR AGENDAMENTO
 
 ########## PROGRAMA PRINCIPAL ##########
 
@@ -754,11 +754,17 @@ while op1 != "0":
         while op2 != "0":
             if op2 == "1":
                 agendarHorario()
-            if op2 == "2":
-                print("===    Fale Conosco    ===")
-                print("=== EM DESENVOLVIMENTO ===")
-            input("Tecle ENTER para continuar")
-            op2 = menuAtendimento()
+            if op2 == "2": ## está dando erro, tem que arrumar
+                op7 = menuInfo()
+                while op7 != "0":
+                    if op7 == "1":
+                        horasInfo()
+                    if op7 == "2":
+                        contatoInfo()
+                    input("Tecle ENTER para continuar")
+                    op7 == menuInfo()
+        input("Tecle ENTER para continuar")
+        op2 = menuAtendimento()
     else:
         print("===   OPÇÃO INVÁLIDA   ===")
     input("Tecle ENTER para continuar")
