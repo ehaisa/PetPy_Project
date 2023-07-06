@@ -511,6 +511,7 @@ def clinicaDias(data):
         return False
 
 def agendarHorario():
+    limpar_tela()
     print("=====================================")
     print("             Agendamento             ")
     print("=====================================")
@@ -557,6 +558,78 @@ def agendarHorario():
                 print("Pet não encontrado.")
     else:
         print("Perfil não encontrado.")
+
+def horarioVago(data, horario):
+    horaCheia = [(agendamento["Data"], agendamento["Horário"]) for agendamento in agendamentos.values()]
+    return (data, horario) not in horaCheia
+
+def configAgenda():
+    limpar_tela()
+    print("=====================================")
+    print("             Agendamento             ")
+    print("=====================================")
+    print()
+    print("Lembre-se de checar nossos horários de funcionamento!")
+    print("O intervalo de tempo entre cada horário é de 30 minutos.")
+    print()
+    donoEmail = input("Informe seu e-mail: ")
+    if donoEmail in agendamentos:
+        donoAgenda = agendamentos[donoEmail]
+        print("== Agendamentos Encontrados == ")
+        print()
+        for agendamento in donoAgenda:
+            print(f"Paciente: {agendamento['Paciente']}")
+        print()
+        print("===============================")
+        petNome = input("Qual pet possui o agendamento a ser editado? ")
+        agendaEncontrada = None
+        for agendamento in donoAgenda:
+            if agendamento["Paciente"] == petNome:
+                agendaEncontrada = agendamento
+                break
+
+        if agendaEncontrada:
+            print("===== Editando Agendamento =====")
+            print()
+            print("\t1 - Serviço")
+            print("\t2 - Horário")
+            print("\t3 - Data")
+            print("\t4 - Cancelar visita")
+            print()
+            print("================================")
+            opcao = input("Escolha a informação que deseja editar: ")
+            if opcao == "1":
+                novoServico = input("Qual novo serviço deseja? ")
+                agendamentos["Serviço"] = novoServico
+                print("Serviço modificado com sucesso!")
+            elif opcao == "2":
+                novoHorario = input("Qual novo horário deseja? ")
+                modNovaHora = datetime.strptime(novoHorario, "%H:%M").time()
+                if clinicaHorarios(modNovaHora):
+                    if horarioVago(agendaEncontrada["Data"], modNovaHora):
+                        agendaEncontrada["Data"] = modNovaHora
+                        print("Horário modificado com sucesso!")
+                    else:
+                        print("Este horário já está ocupado")
+            elif opcao == "3":
+                novaData = input("Qual nova data deseja? ")
+                modNovaData = datetime.strptime(novaData, "%d/%m/%y").date()
+                if clinicaDias(modNovaData):
+                    if horarioVago(modNovaData, agendaEncontrada["Horário"]):
+                        agendaEncontrada["Horário"] = modNovaData
+                        print("Data modificada com sucesso!")
+                    else:
+                        print("Esse dia já está ocupado.")
+            elif opcao == "4":
+                donoAgenda.remove(agendaEncontrada)
+                print("Visita cancelada.")
+                print("Seu agendamento foi retirado de nossos registros.")
+            else:
+                print("Opção inválida.")
+        else:
+            print("Agendamento não encontrado.")
+    else:
+        print("Nenhum horário foi encontrado nesse e-mail.")
 
 def menuInfo():
     limpar_tela()
