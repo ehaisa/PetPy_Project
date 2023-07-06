@@ -565,7 +565,7 @@ def menuInfo():
     print("=====================================")
     print()
     print("\t1 - Horários")
-    print("\t2 - Endereço e contato")
+    print("\t2 - Endereço e Contato")
     print("\t0 - Menu Principal")
     print()
     print("=====================================")
@@ -575,7 +575,7 @@ def menuInfo():
 def horasInfo():
     limpar_tela()
     print("=====================================")
-    print("             Informações             ")
+    print("               Horários              ")
     print("=====================================")
     print()
     print("Segunda à Sexta: ")
@@ -586,6 +586,17 @@ def horasInfo():
     print()
     print("=====================================")
     
+def contatoInfo():
+    limpar_tela()
+    print("=====================================")
+    print("             Nos Visite!             ")
+    print("=====================================")
+    print()
+    print("Rua da Ficção, nº 123")
+    print("Bairro Imaginário, Caicó, RN")
+    print()
+    print("Fale conosco: (84) 1 1122-3344")
+    print("=====================================")
 
 # FALTA CRIAR FUNÇÃO DE VISUALIZAR AGENDAMENTO E EDITAR AGENDAMENTO.
 
