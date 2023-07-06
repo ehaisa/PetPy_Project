@@ -558,6 +558,35 @@ def agendarHorario():
     else:
         print("Perfil não encontrado.")
 
+def menuInfo():
+    limpar_tela()
+    print("=====================================")
+    print("             Informações             ")
+    print("=====================================")
+    print()
+    print("\t1 - Horários")
+    print("\t2 - Endereço e contato")
+    print("\t0 - Menu Principal")
+    print()
+    print("=====================================")
+    opcao = input("Escolha sua opção: ")
+    return opcao
+
+def horasInfo():
+    limpar_tela()
+    print("=====================================")
+    print("             Informações             ")
+    print("=====================================")
+    print()
+    print("Segunda à Sexta: ")
+    print("Manhã: 07h30 às 11h30")
+    print("Tarde: 14h00 às 18h00")
+    print()
+    print("Aos Sábados: 07h30 às 12h00")
+    print()
+    print("=====================================")
+    
+
 # FALTA CRIAR FUNÇÃO DE VISUALIZAR AGENDAMENTO E EDITAR AGENDAMENTO.
 
 ########## PROGRAMA PRINCIPAL ##########
