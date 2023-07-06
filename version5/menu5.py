@@ -538,6 +538,7 @@ def agendarHorario():
 
     if donoEmail in pets:
         dono = pets[donoEmail]
+        limpar_tela()
         print("== Perfis encontrados nesta Conta == ")
         print("=====================================")
         print()
@@ -550,7 +551,8 @@ def agendarHorario():
             servicoVet = input("Para qual serviço você deseja agendar um horário? ")
             dataVet = input("Informe a data desejada (dd/mm/aa): ")
             horaVet = input("Informe a hora desejada (hh:mm): ")
-                
+
+            ## Fonte: https://docs.python.org/pt-br/3/library/datetime.html#strftime-strptime-behavior
             agendarData = datetime.strptime(dataVet, '%d/%m/%y').date()
             agendarHora = datetime.strptime(horaVet, "%H:%M").time()
 
@@ -624,8 +626,8 @@ def configAgenda():
         donoAgenda = agendamentos[donoEmail]
         print("== Visitas marcadas nesta conta == ")
         print()
-        for agendamento in donoAgenda:
-            print(f"Paciente: {agendamento['Paciente']}")
+        for agendamento in donoAgenda["Paciente"]:
+            print(agendamento["Nome"])
         print()
         print("===============================-===")
         petNome = input("Qual você deseja editar? ")
