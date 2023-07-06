@@ -490,6 +490,21 @@ def acessoriosTabela():
     print()
     print("=====================================")
 
+def menuAgenda():
+    limpar_tela()
+    print("=====================================")
+    print("            Agendamentos             ")
+    print("=====================================")
+    print()
+    print("\t1 - Agende sua Visita")
+    print("\t2 - Minha Agenda")
+    print("\t3 - Editar Agenda")
+    print("\t0 - Menu Principal")
+    print()
+    print("=====================================")
+    opcao = input("Escolha sua opção: ")
+    return opcao
+
 agendamentos = {}
 
 def clinicaHorarios(hora):
