@@ -1,3 +1,7 @@
+# TODAS AS FONTES SÃO MATERIAIS ONLINE NOS QUAIS EU USEI PARA ESTUDAR E CRIAR OS CÓDIGOS
+# Proximas ideias: fazer o CRUD dos preços, talvez fazer um CRUD para as informações do "Sobre nós"
+# Solicitações do professor: fazer a tela com identificação dos objetivos e do desenvolvedor e utilizar arquivos para armazenamento dos dados em memória secundária
+
 import os
 import platform
 from datetime import datetime, time
@@ -6,7 +10,7 @@ pets = {}
 
 system = platform.system()
 
-def limpar_tela():  # Código retirado do trabalho em trio que eu participei
+def limpar_tela():  # Código retirado de um trabalho em trio que eu participei, da disciplina
     if system == 'Windows':
         os.system('cls')
     else:
@@ -72,7 +76,7 @@ def menuAtendimento():
     opcao = input("Escolha sua opção: ")
     return opcao
 
-def validarEmail(): # Código retirado do trabalho em trio que eu participei com apenas a adição do return
+def validarEmail(): # Código retirado de um trabalho em trio que eu participei, da disciplina, com apenas a adição do return
     email = input("Digite seu email: ")
     while True:
         if email.count("@") == 1 and email.count(".") >= 1:
@@ -124,7 +128,7 @@ def petCadastro(): # Inspirado no exemplo dado pelo professor Flavius
     donoEmail = validarEmail()
     donoContato = validarNumero()
 
-    if donoEmail in pets: # O if foi desenvolvido com o auxílio do chatGPT
+    if donoEmail in pets: # O if para a possibilidade de uma pessoa ter multiplos pets foi desenvolvido com o auxílio do chatGPT
         pets[donoEmail]["Pets"].append({
         "Nome": petNome,
         "Tipo": petTipo,
@@ -198,8 +202,7 @@ def configConta():
             print("\t2 - Tipo")
             print("\t3 - Idade")
             print("\t4 - Condições Médicas")
-            print("\t5 - Dono")
-            print("\t6 - Excluir conta")
+            print("\t5 - Excluir conta")
             print()
             print("================================")
             opcao = input("Escolha a informação que deseja editar: ")
@@ -220,10 +223,6 @@ def configConta():
                 petEditado["Condições Médicas"] = novasCondicoes
                 print("Condições médicas atualizadas com sucesso!")
             elif opcao == "5":
-                novoDono = input("Digite o novo dono: ")
-                petEditado["Dono"] = novoDono
-                print("Dono atualizado com sucesso!")
-            elif opcao == "6":
                 dono["Pets"].remove(pet)
                 print("Perfil deletado com sucesso!")
             else:
@@ -248,6 +247,7 @@ def menuBanho():
     opcao = input("Escolha sua opção: ")
     return opcao
 
+# Preços retirados de https://petsfood.app.br/tabela-de-precos-banho-e-tosa/
 banhoP = {
         "Banho Pelo Curto": 50,
         "Banho Pelo Longo": 55,
@@ -396,7 +396,7 @@ def menuProdutos():
     opcao = input("Escolha sua opção: ")
     return opcao
 
-# A base dos preços foram retirados da https://www.petz.com.br/
+# Todos os preços, menos os dos acessórios foram retirados da https://www.petz.com.br/
 comidaGatos = {
     "Ração 1kg": 26.90,
     "Ração 3kg": 61.90,
@@ -419,12 +419,12 @@ higienePrecos = {
     "Escova para pelos": 12.99
 }
 
-acessorioPrecos = {
-    "Coleira Ajustável": 25.00,
-    "Guia de Passeio": 30.00,
-    "Comedouro e Bebedouro (aço inoxidável)": 30.00,
-    "Cama para pet": 50.00,
-    "Caixa transportadora": 60.00
+acessorioPrecos = { # Esses preços não são da Petz, mas foram criados levando como referencia os valores dos outros dicionarios
+    "Coleira Ajustável": 25.90,
+    "Guia de Passeio": 32.50,
+    "Comedouro e Bebedouro (aço inoxidável)": 34.99,
+    "Cama para pet": 67.00,
+    "Caixa transportadora": 72.90
 }
 
 def comidasOpcoes():
@@ -540,20 +540,18 @@ def agendarHorario():
     donoEmail = input("Informe seu e-mail: ")
 
     if donoEmail in pets:
-        limpar_tela()
         dono = pets[donoEmail]
-        print("== Perfis encontrados nesta Conta == ")
+        print("== Perfis Encontrados nesta Conta == ")
         print("=====================================")
         print()
         for i, pet in enumerate(dono["Pets"]):
             print(f"{i+1} - {pet['Nome']}")
-        print()
         print("=====================================")
-        opcao = int(input("Para qual pet será o agendamento? "))
+        opcao = int(input("Escolha sua opção: "))
         
-        paciente = dono["Pets"]
+        animal = dono["Pets"]
         if 1 <= opcao <= len(dono):
-            pacienteNome = paciente[opcao-1]
+            pacienteNome = animal[opcao-1]
 
             servicoVet = input("Para qual serviço você deseja agendar um horário? ")
             dataVet = input("Informe a data desejada (dd/mm/aa): ")
@@ -566,14 +564,17 @@ def agendarHorario():
             if clinicaHorarios(agendarHora) and clinicaDias(agendarData):
                 if donoEmail in agendamentos:
                     agendamentos[donoEmail]["Paciente"].append({
+                        "Condições Médicas": pacienteNome["Condições Médicas"],
                         "Serviço": servicoVet,
                         "Data": dataVet,
                         "Horário": agendarHora
                     })
                 else:
                     agendamentos[donoEmail] = {
+                        "Dono": dono["Dono"],
                         "Paciente": [{
-                            "Nome": paciente,
+                            "Nome": pacienteNome,
+                            "Condições Médicas": pacienteNome["Condições Médicas"],
                             "Serviço": servicoVet,
                             "Data": dataVet,
                             "Horário": agendarHora
@@ -600,7 +601,8 @@ def minhaAgenda():
             for agendamento in donoAgenda["Paciente"]:
                 print("================================== ")
                 print()
-                print("Paciente: ", agendamento["Nome"])
+                print("Paciente: ", agendamento["Nome"]) # invés de aparecer o nome do paciente, aparece todo o dicionario, precisa arrumar
+                print("Condições Médicas: ", agendamento["Condições Médicas"])
                 print("Serviço: ", agendamento["Serviço"])
                 print("Data: ", agendamento["Data"])
                 print("Horário: ", agendamento["Horário"])
@@ -635,11 +637,11 @@ def configAgenda():
         donoAgenda = agendamentos[donoEmail]
         print("== Visitas marcadas nesta conta == ")
         print()
-        for i, agendamento in enumerate(donoAgenda["Paciente"]):
-            print(f"{i+1} - {agendamento['Nome']}")
+        for i, agendamento in enumerate(donoAgenda["Paciente"]): 
+            print(f"{i+1} - {agendamento['Nome']}") # invés de aparecer o nome do paciente, aparece todo o dicionario, precisa arrumar
         print()
         print("===============================-===")
-        opcao = input("Qual você deseja editar? ")
+        opcao = int(input("Qual você deseja editar? "))
         
         pacientes = donoAgenda["Paciente"]
         if 1 <= opcao <= len(donoAgenda):
