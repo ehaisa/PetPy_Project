@@ -6,15 +6,14 @@ pets = {}
 
 system = platform.system()
 
-def limpar_tela():
+def limpar_tela():  # Código retirado do trabalho em trio que eu participei
     if system == 'Windows':
         os.system('cls')
     else:
         os.system('clear')
 
-def menuPrincipal():
-    limpar_tela()
-    print("=====================================")
+def menuPrincipal(): # Todos os menus foram criados inspirados no exemplo dado pelo professor Flavius
+    limpar_tela()   # Fonte: https://replit.com/@flaviusgorgonio/ProjetoComFuncoes4py
     print("             PETPY SHOP              ")
     print("    A melhor opção para o seu pet    ")
     print("=====================================")
@@ -73,7 +72,7 @@ def menuAtendimento():
     opcao = input("Escolha sua opção: ")
     return opcao
 
-def validarEmail():
+def validarEmail(): # Código retirado do trabalho em trio que eu participei com apenas a adição do return
     email = input("Digite seu email: ")
     while True:
         if email.count("@") == 1 and email.count(".") >= 1:
@@ -107,8 +106,8 @@ def validarNumero():
         print("O cadastro foi realizado com sucesso!")
         return contato
 
-def petCadastro():
-    print("Informe os dados do seu pet:")
+def petCadastro(): # Inspirado no exemplo dado pelo professor Flavius
+    print("Informe os dados do seu pet:") # Fonte: https://replit.com/@flaviusgorgonio/ProjetoComFuncoes4py
     print()
     petNome = input("Qual o nome dele? ")
     petTipo = input("Que animal ele é? ")
@@ -125,7 +124,7 @@ def petCadastro():
     donoEmail = validarEmail()
     donoContato = validarNumero()
 
-    if donoEmail in pets: # MODIFICAÇÃO FEITA: CHAVE MUDADA E POSSIBILIDADE DE MULTIPLOS PETS POR DONO
+    if donoEmail in pets: # O if foi desenvolvido com o auxílio do chatGPT
         pets[donoEmail]["Pets"].append({
         "Nome": petNome,
         "Tipo": petTipo,
@@ -148,7 +147,7 @@ def petCadastro():
     print("Sejam bem-vindos %s e %s. "%(donoNome, petNome))
 
 def minhaConta():
-        while True: # MODIFICAÇÃO FEITA: LAÇO COLOCADO PARA MELHOR RESPONSIVIDADE
+        while True:
             limpar_tela()
             print("=====================================")
             print("            Acessar Perfil           ")
@@ -169,10 +168,13 @@ def minhaConta():
                 limpar_tela()
                 print("Perfil não encontrado! Certifique-se que o e-mail foi digitado corretamente.")
                 resp = input("Quer tentar novamente? ").lower()
-                if resp != "sim":
+                if resp == "sim":
+                    limpar_tela()
+                    donoEmail = input("Digite seu e-mail: ")
+                else:
                     break
 
-def configConta(): # MODIFICAÇÃO FEITA: CHAVE MUDADA E EDIÇÃO DE CADA PET
+def configConta():
     limpar_tela()
     print()
     donoEmail = input("Digite seu e-mail: ")
@@ -182,7 +184,7 @@ def configConta(): # MODIFICAÇÃO FEITA: CHAVE MUDADA E EDIÇÃO DE CADA PET
         print("=====================================")
         print()
         for i, pet in enumerate(dono["Pets"]): # Fonte: https://www.hashtagtreinamentos.com/enumerate-no-python?gad=1&gclid=CjwKCAjwzJmlBhBBEiwAEJyLuzyK3Dd003sj_0rW_2fw14-HSJVq_p1lA5hw1z7M7Sysg4d9kmG7_hoCEEsQAvD_BwE
-            print(f"{i+1} - {pet['Nome']}")   # Fonte: https://docs.python.org/pt-br/3/tutorial/inputoutput.html
+            print(f"{i+1} - {pet['Nome']}")   # Fonte do formato: https://docs.python.org/pt-br/3/tutorial/inputoutput.html
         print()
         print("=====================================")
         opcao = int(input("Escolha sua opção: "))
@@ -319,7 +321,8 @@ def menuClinica():
     opcao = input("Escolha sua opção: ")
     return opcao
 
-consultaPrecos = {
+# Todos os preços foram gerados pelo chatGPT, já que não encontrei em sites
+consultaPrecos = { 
    "Consulta de Rotina": 80,
    "Consulta de Emergência": 120,
  }
@@ -393,6 +396,7 @@ def menuProdutos():
     opcao = input("Escolha sua opção: ")
     return opcao
 
+# A base dos preços foram retirados da https://www.petz.com.br/
 comidaGatos = {
     "Ração 1kg": 26.90,
     "Ração 3kg": 61.90,
@@ -506,7 +510,7 @@ def menuAgenda():
 
 agendamentos = {}
 
-def clinicaHorarios(hora):
+def clinicaHorarios(hora): # Feito com auxilio do chatGPT
     manhaAbre = time(7, 0)
     manhaFecha = time(11, 30)
     tardeAbre = time(14, 0)
@@ -517,7 +521,7 @@ def clinicaHorarios(hora):
             return True
     return False
 
-def clinicaDias(data):
+def clinicaDias(data): # Feito com auxilio do chatGPT
     diaFunciona = data.weekday()
     if 0 <= diaFunciona <= 5:
         return True
@@ -541,12 +545,16 @@ def agendarHorario():
         print("== Perfis encontrados nesta Conta == ")
         print("=====================================")
         print()
-        for pet in dono["Pets"]:
-            print(pet["Nome"])
+        for i, pet in enumerate(dono["Pets"]):
+            print(f"{i+1} - {pet['Nome']}")
         print()
         print("=====================================")
-        petNome = input("Para qual pet será o agendamento? ")
-        if pet["Nome"] == petNome:
+        opcao = input("Para qual pet será o agendamento? ")
+        
+        paciente = dono["Pets"]
+        if 1 <= opcao <= len(dono):
+            pacienteNome = paciente[opcao-1]
+
             servicoVet = input("Para qual serviço você deseja agendar um horário? ")
             dataVet = input("Informe a data desejada (dd/mm/aa): ")
             horaVet = input("Informe a hora desejada (hh:mm): ")
@@ -565,7 +573,7 @@ def agendarHorario():
                 else:
                     agendamentos[donoEmail] = {
                         "Paciente": [{
-                            "Nome": petNome,
+                            "Nome": pacienteNome,
                             "Serviço": servicoVet,
                             "Data": dataVet,
                             "Horário": agendarHora
@@ -603,11 +611,12 @@ def minhaAgenda():
             print("Agendamento não encontrado! Certifique-se que o e-mail foi digitado corretamente.")
             resp = input("Quer tentar novamente? ").lower()
             if resp == "sim":
+                limpar_tela()
                 donoEmail = input("Informe seu e-mail: ")
             else:
                 break
 
-def horarioVago(data, horario):
+def horarioVago(data, horario): # Feito com auxílio do chatGPT
     horaCheia = [(agendamento["Data"], agendamento["Horário"]) for agendamento in agendamentos.values()]
     return (data, horario) not in horaCheia
 
@@ -621,58 +630,61 @@ def configAgenda():
     print("O intervalo de tempo entre cada horário é de 30 minutos.")
     print()
     donoEmail = input("Informe seu e-mail: ")
+
     if donoEmail in agendamentos:
         donoAgenda = agendamentos[donoEmail]
         print("== Visitas marcadas nesta conta == ")
         print()
-        for agendamento in donoAgenda["Paciente"]:
-            print(agendamento["Nome"])
+        for i, agendamento in enumerate(donoAgenda["Paciente"]):
+            print(f"{i+1} - {agendamento['Nome']}")
         print()
         print("===============================-===")
-        petNome = input("Qual você deseja editar? ")
-        for agendamento in donoAgenda:
-            if agendamento["Paciente"] == petNome:
-                print("===== Editando Agendamento =====")
+        opcao = input("Qual você deseja editar? ")
+        
+        pacientes = donoAgenda["Paciente"]
+        if 1 <= opcao <= len(donoAgenda):
+            pacienteNome = pacientes[opcao-1]
+            print("===== Editando Agendamento =====")
+            print()
+            print("\t1 - Serviço")
+            print("\t2 - Horário e Data")
+            print("\t3 - Cancelar visita")
+            print()
+            print("================================")
+            opcao = input("Escolha a informação que deseja editar: ")
+            if opcao == "1":
+                novoServico = input("Qual novo serviço deseja? ")
+                pacienteNome["Serviço"] = novoServico
+                print("Serviço modificado com sucesso!")
+            elif opcao == "2":
+                print("Se quiser modificar o horário, coloque o novo, se quiser manter, escreva o já registrado.")
+                novoHorario = input("Informe o horário: ")
                 print()
-                print("\t1 - Serviço")
-                print("\t2 - Horário e Data")
-                print("\t3 - Cancelar visita")
-                print()
-                print("================================")
-                opcao = input("Escolha a informação que deseja editar: ")
-                if opcao == "1":
-                    novoServico = input("Qual novo serviço deseja? ")
-                    agendamentos["Serviço"] = novoServico
-                    print("Serviço modificado com sucesso!")
-                elif opcao == "2":
-                    print("Se quiser modificar o horário, coloque o novo, se quiser manter, escreva o já registrado.")
-                    novoHorario = input("Informe o horário: ")
-                    print()
-                    print("Se quiser modificar a data, coloque a nova, se quiser manter, escreva a já registrada.")
-                    novaData = input("Informe a data: ")
+                print("Se quiser modificar a data, coloque a nova, se quiser manter, escreva a já registrada.")
+                novaData = input("Informe a data: ")
 
-                    modNovaHora = datetime.strptime(novoHorario, "%H:%M").time()
-                    modNovaData = datetime.strptime(novaData, "%d/%m/%y").date()
-                    
-                    if clinicaHorarios(modNovaHora) and clinicaDias(modNovaData):
-                        if horarioVago(modNovaData, modNovaHora):
-                            donoAgenda["Horário"] = modNovaHora
-                            donoAgenda["Data"] = modNovaData
-                            print("Horário e data modificados com sucesso!")
-                        else:
-                            print("Data ou horário já ocupados.")
+                modNovaHora = datetime.strptime(novoHorario, "%H:%M").time()
+                modNovaData = datetime.strptime(novaData, "%d/%m/%y").date()
+                
+                if clinicaHorarios(modNovaHora) and clinicaDias(modNovaData):
+                    if horarioVago(modNovaData, modNovaHora):
+                        pacienteNome["Horário"] = modNovaHora
+                        pacienteNome["Data"] = modNovaData
+                        print("Horário e data modificados com sucesso!")
                     else:
-                        print("Data ou horário inválido")
-                elif opcao == "3":
-                    donoAgenda.remove(donoAgenda)
-                    print("Visita cancelada.")
-                    print("Seu agendamento foi retirado de nossos registros.")
+                        print("Data ou horário já ocupados.")
+                else:
+                    print("Data ou horário inválido")
+            elif opcao == "3":
+                donoAgenda.remove(donoAgenda)
+                print("Visita cancelada.")
+                print("Seu agendamento foi retirado de nossos registros.")
             else:
                 print("Opção inválida.")
         else:
             print("Agendamento não encontrado.")
     else:
-        print("Nenhum horário foi encontrado nesse e-mail.")
+        print("Nenhum agendamento foi encontrado nesse e-mail.")
 
 def menuInfo():
     limpar_tela()
