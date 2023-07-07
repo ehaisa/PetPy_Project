@@ -540,8 +540,8 @@ def agendarHorario():
     donoEmail = input("Informe seu e-mail: ")
 
     if donoEmail in pets:
-        dono = pets[donoEmail]
         limpar_tela()
+        dono = pets[donoEmail]
         print("== Perfis encontrados nesta Conta == ")
         print("=====================================")
         print()
@@ -549,7 +549,7 @@ def agendarHorario():
             print(f"{i+1} - {pet['Nome']}")
         print()
         print("=====================================")
-        opcao = input("Para qual pet será o agendamento? ")
+        opcao = int(input("Para qual pet será o agendamento? "))
         
         paciente = dono["Pets"]
         if 1 <= opcao <= len(dono):
@@ -573,7 +573,7 @@ def agendarHorario():
                 else:
                     agendamentos[donoEmail] = {
                         "Paciente": [{
-                            "Nome": pacienteNome,
+                            "Nome": paciente,
                             "Serviço": servicoVet,
                             "Data": dataVet,
                             "Horário": agendarHora
@@ -803,7 +803,7 @@ while op1 != "0":
                         configAgenda()
                     input("Tecle ENTER para continuar")
                     op3 = menuAgenda()
-            if op2 == "2": ## está dando erro, tem que arrumar
+            elif op2 == "2": ## está dando erro, tem que arrumar
                 op3 = menuInfo()
                 while op3 != "0":
                     if op3 == "1":
