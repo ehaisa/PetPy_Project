@@ -181,54 +181,53 @@ def configConta(): # MODIFICAÇÃO FEITA: CHAVE MUDADA E EDIÇÃO DE CADA PET
         print("== Perfis Encontrados nesta Conta == ")
         print("=====================================")
         print()
-        for pet in dono["Pets"]:
-            print(pet["Nome"])
+        for i, pet in enumerate(dono["Pets"]): # Fonte: https://www.hashtagtreinamentos.com/enumerate-no-python?gad=1&gclid=CjwKCAjwzJmlBhBBEiwAEJyLuzyK3Dd003sj_0rW_2fw14-HSJVq_p1lA5hw1z7M7Sysg4d9kmG7_hoCEEsQAvD_BwE
+            print(f"{i+1} - {pet['Nome']}")   # Fonte: https://docs.python.org/pt-br/3/tutorial/inputoutput.html
         print()
         print("=====================================")
+        opcao = int(input("Escolha sua opção: "))
 
-        petNome = input("Qual pet você deseja editar? ")
-
-        for pet in dono["Pets"]:
-            if pet["Nome"] == petNome:
-                print("======== Editando Conta ========")
-                print()
-                print("\t1 - Nome")
-                print("\t2 - Tipo")
-                print("\t3 - Idade")
-                print("\t4 - Condições Médicas")
-                print("\t5 - Dono")
-                print("\t6 - Excluir conta")
-                print()
-                print("================================")
-                opcao = input("Escolha a informação que deseja editar: ")
-                if opcao == "1":
-                    novoNome = input("Qual o novo nome dele? ")
-                    pet["Nome"] = novoNome
-                    print("Nome atualizado com sucesso!")
-                elif opcao == "2":
-                    novoTipo = input("Que animal ele é? ")
-                    pet["Tipo"] = novoTipo
-                    print("Tipo atualizado com sucesso!")
-                elif opcao == "3":
-                    novaIdade = input("Quantos anos ele tem? ")
-                    pet["Idade"] = novaIdade
-                    print("Idade atualizada com sucesso!")
-                elif opcao == "4":
-                    novasCondicoes = input("Digite as novas condições médicas: ")
-                    pet["Condições Médicas"] = novasCondicoes
-                    print("Condições médicas atualizadas com sucesso!")
-                elif opcao == "5":
-                    novoDono = input("Digite o novo dono: ")
-                    pet["Dono"] = novoDono
-                    print("Dono atualizado com sucesso!")
-                elif opcao == "6":
-                    dono["Pets"].remove(pet)
-                    print("Perfil deletado com sucesso!")
-                else:
-                    print("Opção inválida!")
-                break
+        animal = dono["Pets"]
+        if 1 <= opcao <= len(dono):
+            petEditado = animal[opcao-1]
+            print("======== Editando Conta ========")
+            print()
+            print("\t1 - Nome")
+            print("\t2 - Tipo")
+            print("\t3 - Idade")
+            print("\t4 - Condições Médicas")
+            print("\t5 - Dono")
+            print("\t6 - Excluir conta")
+            print()
+            print("================================")
+            opcao = input("Escolha a informação que deseja editar: ")
+            if opcao == "1":
+                novoNome = input("Qual o novo nome dele? ")
+                petEditado["Nome"] = novoNome
+                print("Nome atualizado com sucesso!")
+            elif opcao == "2":
+                novoTipo = input("Que animal ele é? ")
+                petEditado["Tipo"] = novoTipo
+                print("Tipo atualizado com sucesso!")
+            elif opcao == "3":
+                novaIdade = input("Quantos anos ele tem? ")
+                petEditado["Idade"] = novaIdade
+                print("Idade atualizada com sucesso!")
+            elif opcao == "4":
+                novasCondicoes = input("Digite as novas condições médicas: ")
+                petEditado["Condições Médicas"] = novasCondicoes
+                print("Condições médicas atualizadas com sucesso!")
+            elif opcao == "5":
+                novoDono = input("Digite o novo dono: ")
+                petEditado["Dono"] = novoDono
+                print("Dono atualizado com sucesso!")
+            elif opcao == "6":
+                dono["Pets"].remove(pet)
+                print("Perfil deletado com sucesso!")
             else:
-                print("Perfil não encontrado")
+                print("Opção inválida!")
+        else:
+            print("Perfil não encontrado")
     else:
         print("Dono não encontrado.")
 
