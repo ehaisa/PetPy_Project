@@ -32,7 +32,7 @@ def menuPrincipal(): # Todos os menus foram criados inspirados no exemplo dado p
     opcao = input("O que você deseja acessar? ")
     return opcao
 
-def petPerfil():
+def petPerfil(): # Fonte: https://replit.com/@flaviusgorgonio/ProjetoComFuncoes4py
     limpar_tela()
     print("=====================================")
     print("             Pet Perfil              ")
@@ -47,7 +47,7 @@ def petPerfil():
     opcao = input("Escolha sua opção: ")
     return opcao
 
-def menuServicos():
+def menuServicos(): # Fonte: https://replit.com/@flaviusgorgonio/ProjetoComFuncoes4py
     limpar_tela()
     print("=====================================")
     print("            Serviços Pet             ")
@@ -62,7 +62,7 @@ def menuServicos():
     opcao = input("Escolha sua opção: ")
     return opcao
 
-def menuAtendimento():
+def menuAtendimento(): # Fonte: https://replit.com/@flaviusgorgonio/ProjetoComFuncoes4py
     limpar_tela()
     print("=====================================")
     print("             Atendimento             ")
@@ -116,7 +116,7 @@ def petCadastro(): # Inspirado no exemplo dado pelo professor Flavius
     petNome = input("Qual o nome dele? ")
     petTipo = input("Que animal ele é? ")
     petIdade = input("Quantos anos ele tem? ")
-    petSaude = input("Ele tem alguma condição médica importante de lembrar, como alergias ou doenças? ")
+    petSaude = input("Ele tem alguma condição médica importante de lembrar, como alergias ou doenças? (sim/não)  ")
     if petSaude.lower() == "sim":
         petCondicoes = input("Informe a(s) condição(ões) dele: ")
         print("Agora, para finalizar, informe alguns dados sobre você: ")
@@ -171,18 +171,18 @@ def minhaConta():
             else:
                 limpar_tela()
                 print("Perfil não encontrado! Certifique-se que o e-mail foi digitado corretamente.")
-                resp = input("Quer tentar novamente? ").lower()
+                resp = input("Quer tentar novamente? (sim/não) ").lower()
                 if resp == "sim":
                     limpar_tela()
-                    donoEmail = input("Digite seu e-mail: ")
+                    minhaConta()
                 else:
                     break
 
-def configConta():
-    limpar_tela()
-    print()
+def configConta(): # Inspirado no exemplo dado pelo professor Flavius
+    limpar_tela()  # Fonte: https://replit.com/@flaviusgorgonio/ProjetoComFuncoes4py
     donoEmail = input("Digite seu e-mail: ")
     if donoEmail in pets:
+        limpar_tela()
         dono = pets[donoEmail]
         print("== Perfis Encontrados nesta Conta == ")
         print("=====================================")
@@ -194,7 +194,7 @@ def configConta():
         opcao = int(input("Escolha sua opção: "))
 
         animal = dono["Pets"]
-        if 1 <= opcao <= len(dono):
+        if 1 <= opcao <= len(dono): # Feito com auxílio do chatGPT
             petEditado = animal[opcao-1]
             print("======== Editando Conta ========")
             print()
@@ -205,7 +205,7 @@ def configConta():
             print("\t5 - Excluir conta")
             print()
             print("================================")
-            opcao = input("Escolha a informação que deseja editar: ")
+            opcao = input("Escolha a informação que deseja editar: ") 
             if opcao == "1":
                 novoNome = input("Qual o novo nome dele? ")
                 petEditado["Nome"] = novoNome
@@ -232,7 +232,7 @@ def configConta():
     else:
         print("Dono não encontrado.")
 
-def menuBanho():
+def menuBanho(): # Fonte: https://replit.com/@flaviusgorgonio/ProjetoComFuncoes4py
     limpar_tela()
     print("=====================================")
     print("            Banho e Tosa             ")
@@ -266,7 +266,7 @@ banhoG = {
     "Tosa Máquina": 150
 }
 
-def porteP():
+def porteP(): 
     limpar_tela()
     print("=====================================")
     print("            Banho e Tosa             ")
@@ -275,7 +275,7 @@ def porteP():
     print("Tabela de Preços - Pequeno Porte ")
     print()
     for chave, valor in banhoP.items():
-        print(f"{chave} - {valor:.2f}")
+        print(f"{chave} - {valor:.2f}") # Fonte do formato: https://docs.python.org/pt-br/3/tutorial/inputoutput.html
     print()
     print("=====================================")
 
@@ -288,7 +288,7 @@ def porteM():
     print("Tabela de Preços - Médio Porte ")
     print()
     for chave, valor in banhoM.items():
-        print(f"{chave} - {valor:.2f}")
+        print(f"{chave} - {valor:.2f}") # Fonte do formato: https://docs.python.org/pt-br/3/tutorial/inputoutput.html
     print()
     print("=====================================")
 
@@ -301,12 +301,12 @@ def porteG():
     print("Tabela de Preços - Grande Porte ")
     print()
     for chave, valor in banhoG.items():
-        print(f"{chave} - {valor:.2f}")
+        print(f"{chave} - {valor:.2f}") # Fonte do formato: https://docs.python.org/pt-br/3/tutorial/inputoutput.html
     print()
     print("=====================================")
 
 
-def menuClinica():
+def menuClinica(): # Fonte: https://replit.com/@flaviusgorgonio/ProjetoComFuncoes4py
     limpar_tela()
     print("=====================================")
     print("             Clínica Vet             ")
@@ -348,7 +348,7 @@ def consultasTabela():
     print("Tabela de Preços de Consulta: ")
     print()
     for chave, valor in consultaPrecos.items():
-        print(f"{chave} - {valor:.2f}")
+        print(f"{chave} - {valor:.2f}") # Fonte: https://replit.com/@flaviusgorgonio/ProjetoComFuncoes4py
     print()
     print("=====================================")
 
@@ -362,7 +362,7 @@ def examesTabela():
     print("Tabela de Preços de Exames: ")
     print()
     for chave, valor in examesPrecos.items():
-        print(f"{chave} - {valor:.2f}")
+        print(f"{chave} - {valor:.2f}") # Fonte: https://replit.com/@flaviusgorgonio/ProjetoComFuncoes4py
     print()
     print("=====================================")
 
@@ -376,12 +376,12 @@ def utiTabela():
     print("Tabela de Preços de Internação: ")
     print()
     for chave, valor in utiPrecos.items():
-        print(f"{chave} - {valor:.2f}")
+        print(f"{chave} - {valor:.2f}") # Fonte: https://replit.com/@flaviusgorgonio/ProjetoComFuncoes4py
     print()
     print("=====================================")
 
 
-def menuProdutos():
+def menuProdutos(): # Fonte: https://replit.com/@flaviusgorgonio/ProjetoComFuncoes4py
     limpar_tela()
     print("=====================================")
     print("           Nossos Produtos           ")
@@ -427,7 +427,7 @@ acessorioPrecos = { # Esses preços não são da Petz, mas foram criados levando
     "Caixa transportadora": 72.90
 }
 
-def comidasOpcoes():
+def comidasOpcoes(): # Fonte: https://replit.com/@flaviusgorgonio/ProjetoComFuncoes4py
     limpar_tela()
     print("=====================================")
     print("           Nossos Produtos           ")
@@ -493,7 +493,7 @@ def acessoriosTabela():
     print()
     print("=====================================")
 
-def menuAgenda():
+def menuAgenda(): # Fonte: https://replit.com/@flaviusgorgonio/ProjetoComFuncoes4py
     limpar_tela()
     print("=====================================")
     print("            Agendamentos             ")
@@ -615,17 +615,17 @@ def minhaAgenda():
             resp = input("Quer tentar novamente? ").lower()
             if resp == "sim":
                 limpar_tela()
-                donoEmail = input("Informe seu e-mail: ")
+                minhaAgenda()
             else:
                 break
 
-def horarioVago(data, horario, donoEmail):
+def horarioVago(data, horario, donoEmail): # Feito com o auxílio de José Flávio
     donoAgenda = agendamentos[donoEmail]
     pacienteAgenda = donoAgenda["Paciente"]
     horaCheia = [(agendamento["Data"],agendamento["Horário"]) for agendamento in pacienteAgenda]
     return (data, horario) not in horaCheia
 
-def configAgenda():
+def configAgenda(): # Fonte: https://replit.com/@flaviusgorgonio/ProjetoComFuncoes4py
     limpar_tela()
     print("=====================================")
     print("             Agendamento             ")
@@ -668,6 +668,7 @@ def configAgenda():
                 print("Se quiser modificar o horário, coloque o novo, se quiser manter, escreva o já registrado.")
                 novoHorario = input("Informe o horário: ")
 
+                ## Fonte: https://docs.python.org/pt-br/3/library/datetime.html#strftime-strptime-behavior
                 modNovaHora = datetime.strptime(novoHorario, "%H:%M").time()
                 modNovaData = datetime.strptime(novaData, "%d/%m/%y").date()
 
@@ -691,7 +692,7 @@ def configAgenda():
     else:
         print("Nenhum agendamento foi encontrado nesse e-mail.")
 
-def menuInfo():
+def menuInfo(): # Fonte: https://replit.com/@flaviusgorgonio/ProjetoComFuncoes4py
     limpar_tela()
     print("=====================================")
     print("             Informações             ")
@@ -731,7 +732,6 @@ def contatoInfo():
     print("Fale conosco: (84) 1 1122-3344")
     print("=====================================")
 
-# FALTA CRIAR FUNÇÃO DE VISUALIZAR AGENDAMENTO
 
 ########## PROGRAMA PRINCIPAL ##########
 
@@ -808,7 +808,7 @@ while op1 != "0":
                         configAgenda()
                     input("Tecle ENTER para continuar")
                     op3 = menuAgenda()
-            elif op2 == "2": ## está dando erro, tem que arrumar
+            elif op2 == "2":
                 op3 = menuInfo()
                 while op3 != "0":
                     if op3 == "1":
