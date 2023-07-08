@@ -546,6 +546,7 @@ def agendarHorario():
         print()
         for i, pet in enumerate(dono["Pets"]):
             print(f"{i+1} - {pet['Nome']}")
+        print()
         print("=====================================")
         opcao = int(input("Escolha sua opção: "))
         
@@ -564,7 +565,7 @@ def agendarHorario():
             if clinicaHorarios(agendarHora) and clinicaDias(agendarData):
                 if donoEmail in agendamentos:
                     agendamentos[donoEmail]["Paciente"].append({
-                        "Condições Médicas": pacienteNome["Condições Médicas"],
+                        "Condições Médicas": pacienteNome['Condições Médicas'],
                         "Serviço": servicoVet,
                         "Data": dataVet,
                         "Horário": agendarHora
@@ -573,8 +574,8 @@ def agendarHorario():
                     agendamentos[donoEmail] = {
                         "Dono": dono["Dono"],
                         "Paciente": [{
-                            "Nome": pacienteNome,
-                            "Condições Médicas": pacienteNome["Condições Médicas"],
+                            "Nome": pacienteNome['Nome'],
+                            "Condições Médicas": pacienteNome['Condições Médicas'],
                             "Serviço": servicoVet,
                             "Data": dataVet,
                             "Horário": agendarHora
@@ -601,7 +602,7 @@ def minhaAgenda():
             for agendamento in donoAgenda["Paciente"]:
                 print("================================== ")
                 print()
-                print("Paciente: ", agendamento["Nome"]) # invés de aparecer o nome do paciente, aparece todo o dicionario, precisa arrumar
+                print("Paciente: ", agendamento['Nome'])
                 print("Condições Médicas: ", agendamento["Condições Médicas"])
                 print("Serviço: ", agendamento["Serviço"])
                 print("Data: ", agendamento["Data"])
@@ -638,7 +639,7 @@ def configAgenda():
         print("== Visitas marcadas nesta conta == ")
         print()
         for i, agendamento in enumerate(donoAgenda["Paciente"]): 
-            print(f"{i+1} - {agendamento['Nome']}") # invés de aparecer o nome do paciente, aparece todo o dicionario, precisa arrumar
+            print(f"{i+1} - {agendamento['Nome']}")
         print()
         print("===============================-===")
         opcao = int(input("Qual você deseja editar? "))
@@ -667,7 +668,8 @@ def configAgenda():
 
                 modNovaHora = datetime.strptime(novoHorario, "%H:%M").time()
                 modNovaData = datetime.strptime(novaData, "%d/%m/%y").date()
-                
+                print(agendamento["Data"])
+                print(agendamento["Horário"])
                 if clinicaHorarios(modNovaHora) and clinicaDias(modNovaData):
                     if horarioVago(modNovaData, modNovaHora):
                         pacienteNome["Horário"] = modNovaHora
