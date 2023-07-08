@@ -619,8 +619,10 @@ def minhaAgenda():
             else:
                 break
 
-def horarioVago(data, horario): # Feito com auxílio do chatGPT
-    horaCheia = [(agendamento["Data"], agendamento["Horário"]) for agendamento in agendamentos.values()]
+def horarioVago(data, horario, donoEmail):
+    donoAgenda = agendamentos[donoEmail]
+    pacienteAgenda = donoAgenda["Paciente"]
+    horaCheia = [(agendamento["Data"],agendamento["Horário"]) for agendamento in pacienteAgenda]
     return (data, horario) not in horaCheia
 
 def configAgenda():
@@ -660,18 +662,17 @@ def configAgenda():
                 pacienteNome["Serviço"] = novoServico
                 print("Serviço modificado com sucesso!")
             elif opcao == "2":
-                print("Se quiser modificar o horário, coloque o novo, se quiser manter, escreva o já registrado.")
-                novoHorario = input("Informe o horário: ")
-                print()
                 print("Se quiser modificar a data, coloque a nova, se quiser manter, escreva a já registrada.")
                 novaData = input("Informe a data: ")
+                print()
+                print("Se quiser modificar o horário, coloque o novo, se quiser manter, escreva o já registrado.")
+                novoHorario = input("Informe o horário: ")
 
                 modNovaHora = datetime.strptime(novoHorario, "%H:%M").time()
                 modNovaData = datetime.strptime(novaData, "%d/%m/%y").date()
-                print(agendamento["Data"])
-                print(agendamento["Horário"])
+
                 if clinicaHorarios(modNovaHora) and clinicaDias(modNovaData):
-                    if horarioVago(modNovaData, modNovaHora):
+                    if horarioVago(modNovaData, modNovaHora, donoEmail):
                         pacienteNome["Horário"] = modNovaHora
                         pacienteNome["Data"] = modNovaData
                         print("Horário e data modificados com sucesso!")
@@ -812,10 +813,10 @@ while op1 != "0":
                 while op3 != "0":
                     if op3 == "1":
                         horasInfo()
-                    if op3 == "2":
+                    elif op3 == "2":
                         contatoInfo()
                     input("Tecle ENTER para continuar")
-                    op3 == menuInfo()
+                    op3 = menuInfo()
             input("Tecle ENTER para continuar")
             op2 = menuAtendimento()
     else:
