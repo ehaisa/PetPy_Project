@@ -22,7 +22,7 @@ def menuPrincipal(): # Todos os menus foram criados inspirados no exemplo dado p
     print("=====================================")
     print()
     print("\t1 - Área do Cliente")
-    print("\t2 - Nossos Serviços")
+    print("\t2 - Produtos e Serviços")
     print("\t3 - Atendimento")
     print("\t0 - Finalizar Programa")
     print()
@@ -597,13 +597,20 @@ def agendarHorario():
     print("             Agendamento             ")
     print("=====================================")
     print()
-    print("Lembre-se de checar nossos horários de funcionamento!")
-    print("O intervalo de tempo entre cada horário é de 30 minutos.")
+    print("Nossos Horários")
+    print("Segunda à Sexta: ")
+    print("Manhã: 07h30 às 11h30")
+    print("Tarde: 14h00 às 18h00")
+    print()
+    print("Aos Sábados: 07h30 às 12h00")
+    print()
+    print("O intervalo de tempo entre cada agendamento é de 30 minutos.")
     print()
     donoEmail = input("Informe seu e-mail: ")
 
     if donoEmail in pets:
         dono = pets[donoEmail]
+        limpar_tela()
         print("== Perfis Encontrados nesta Conta == ")
         print("=====================================")
         print()
@@ -617,6 +624,7 @@ def agendarHorario():
         if 1 <= opcao <= len(dono):
             pacienteNome = animal[opcao-1]
 
+            limpar_tela()
             servicoVet = input("Para qual serviço você deseja agendar um horário? ")
             dataVet = input("Informe a data desejada (dd/mm/aa): ")
             horaVet = input("Informe a hora desejada (hh:mm): ")
@@ -661,6 +669,7 @@ def minhaAgenda():
         print()
         donoEmail = input("Informe seu e-mail: ")
         if donoEmail in agendamentos:
+            limpar_tela()
             donoAgenda = agendamentos[donoEmail]
             for agendamento in donoAgenda["Paciente"]:
                 print("================================== ")
@@ -675,18 +684,27 @@ def minhaAgenda():
         else:
             limpar_tela()
             print("Agendamento não encontrado! Certifique-se que o e-mail foi digitado corretamente.")
-            resp = input("Quer tentar novamente? ").lower()
-            if resp == "sim":
-                limpar_tela()
-                minhaAgenda()
-            else:
+            resp = input("Quer tentar novamente? ")
+            if resp.lower() != "sim":
                 break
 
-def horarioVago(data, horario, donoEmail): # Feito com o auxílio de José Flávio
+def horarioVago(data, horario, donoEmail): # Adaptado a partir de código gerado no ChatGPT
     donoAgenda = agendamentos[donoEmail]
     pacienteAgenda = donoAgenda["Paciente"]
     horaCheia = [(agendamento["Data"],agendamento["Horário"]) for agendamento in pacienteAgenda]
     return (data, horario) not in horaCheia
+
+def menuConfigAgenda():
+    limpar_tela()
+    print("===== Editando Agendamento =====")
+    print()
+    print("\t1 - Serviço")
+    print("\t2 - Horário e Data")
+    print("\t3 - Cancelar visita")
+    print()
+    print("================================")
+    opcao = input("Escolha a informação que deseja editar: ")
+    return opcao
 
 def configAgenda(): # Fonte: https://replit.com/@flaviusgorgonio/ProjetoComFuncoes4py
     limpar_tela()
@@ -700,6 +718,7 @@ def configAgenda(): # Fonte: https://replit.com/@flaviusgorgonio/ProjetoComFunco
     donoEmail = input("Informe seu e-mail: ")
 
     if donoEmail in agendamentos:
+        limpar_tela()
         donoAgenda = agendamentos[donoEmail]
         print("== Visitas marcadas nesta conta == ")
         print()
@@ -712,44 +731,55 @@ def configAgenda(): # Fonte: https://replit.com/@flaviusgorgonio/ProjetoComFunco
         pacientes = donoAgenda["Paciente"]
         if 1 <= opcao <= len(donoAgenda):
             pacienteNome = pacientes[opcao-1]
-            print("===== Editando Agendamento =====")
-            print()
-            print("\t1 - Serviço")
-            print("\t2 - Horário e Data")
-            print("\t3 - Cancelar visita")
-            print()
-            print("================================")
-            opcao = input("Escolha a informação que deseja editar: ")
-            if opcao == "1":
-                novoServico = input("Qual novo serviço deseja? ")
-                pacienteNome["Serviço"] = novoServico
-                print("Serviço modificado com sucesso!")
-            elif opcao == "2":
-                print("Se quiser modificar a data, coloque a nova, se quiser manter, escreva a já registrada.")
-                novaData = input("Informe a data: ")
-                print()
-                print("Se quiser modificar o horário, coloque o novo, se quiser manter, escreva o já registrado.")
-                novoHorario = input("Informe o horário: ")
+            
+            opcao = menuConfigAgenda()
+            while opcao != "0":
+                if opcao == "1":
+                    limpar_tela()
+                    print("Atualmente, o serviço agendado é ",pacienteNome["Serviço"])
+                    novoServico = input("Qual novo serviço deseja? ")
+                    pacienteNome["Serviço"] = novoServico
+                    print("Serviço modificado com sucesso!")
 
-                ## Fonte: https://docs.python.org/pt-br/3/library/datetime.html#strftime-strptime-behavior
-                modNovaHora = datetime.strptime(novoHorario, "%H:%M").time()
-                modNovaData = datetime.strptime(novaData, "%d/%m/%y").date()
+                elif opcao == "2":
+                    limpar_tela()
+                    print("Atualmente, a data agendada é ",pacienteNome["Data"])
+                    print("Se quiser modificar a data, coloque a nova, se quiser manter, escreva a já registrada.")
+                    novaData = input("Informe a data: ")
+                    print()
+                    print("Atualmente, a data agendada é ",pacienteNome["Horário"])
+                    print("Se quiser modificar o horário, coloque o novo, se quiser manter, escreva o já registrado.")
+                    novoHorario = input("Informe o horário: ")
 
-                if clinicaHorarios(modNovaHora) and clinicaDias(modNovaData):
-                    if horarioVago(modNovaData, modNovaHora, donoEmail):
-                        pacienteNome["Horário"] = modNovaHora
-                        pacienteNome["Data"] = modNovaData
-                        print("Horário e data modificados com sucesso!")
+                    ## Fonte: https://docs.python.org/pt-br/3/library/datetime.html#strftime-strptime-behavior
+                    modNovaHora = datetime.strptime(novoHorario, "%H:%M").time()
+                    modNovaData = datetime.strptime(novaData, "%d/%m/%y").date()
+
+                    if clinicaHorarios(modNovaHora) and clinicaDias(modNovaData):
+                        if horarioVago(modNovaData, modNovaHora, donoEmail):
+                            pacienteNome["Horário"] = modNovaHora
+                            pacienteNome["Data"] = modNovaData
+                            limpar_tela()
+                            print("Horário e data modificados com sucesso!")
+                        else:
+                            limpar_tela()
+                            print("Data ou horário já ocupados.")
                     else:
-                        print("Data ou horário já ocupados.")
+                        limpar_tela()
+                        print("Data ou horário inválido")
+
+                elif opcao == "3":
+                    print("AVISO! Essa ação é permanente!")
+                    resp = input("Você tem certeza que deseja cancelar essa visita? (sim/não) ")
+                    if resp.lower() == "sim":
+                        donoAgenda.remove(pacienteNome)
+                        print("Visita cancelada.")
+                        print("Seu agendamento foi retirado de nossos registros.")
+                    else:
+                        print("Ufa! Essa foi por pouco...")
                 else:
-                    print("Data ou horário inválido")
-            elif opcao == "3":
-                donoAgenda.remove(donoAgenda)
-                print("Visita cancelada.")
-                print("Seu agendamento foi retirado de nossos registros.")
-            else:
-                print("Opção inválida.")
+                    print("Opção inválida.")
+                opcao = menuConfigAgenda()
         else:
             print("Agendamento não encontrado.")
     else:
@@ -761,25 +791,29 @@ def menuInfo(): # Fonte: https://replit.com/@flaviusgorgonio/ProjetoComFuncoes4p
     print("             Informações             ")
     print("=====================================")
     print()
-    print("\t1 - Horários")
-    print("\t2 - Endereço e Contato")
+    print("\t1 - Endereço e Contato")
+    print("\t2 - Informações sobre o Programa")
     print("\t0 - Menu Principal")
     print()
     print("=====================================")
     opcao = input("Escolha sua opção: ")
     return opcao
 
-def horasInfo():
+def projectInfo(): # Fonte: https://replit.com/@flaviusgorgonio/ProjetoComFuncoes8py?v=1
     limpar_tela()
     print("=====================================")
-    print("               Horários              ")
+    print("             Informações             ")
     print("=====================================")
     print()
-    print("Segunda à Sexta: ")
-    print("Manhã: 07h30 às 11h30")
-    print("Tarde: 14h00 às 18h00")
+    print("Este programa é um projeto desenvolvido")
+    print("com proprósito acadêmico para a disci-")
+    print("plina de Algoritmos e Lógica de progra-")
+    print("mação. Foi feito inteiramenta com o obje-")
+    print("tivo de educar e estimular o aluno a pra-")
+    print("tricar, aprimorando suas habilidades.")
     print()
-    print("Aos Sábados: 07h30 às 12h00")
+    print("Desenvolvido por Isa Laura, @ehaisa")
+    print("UFRN, CERES - Sistemas da Informação")
     print()
     print("=====================================")
     
@@ -875,9 +909,9 @@ while op1 != "0":
                 op3 = menuInfo()
                 while op3 != "0":
                     if op3 == "1":
-                        horasInfo()
-                    elif op3 == "2":
                         contatoInfo()
+                    elif op3 == "2":
+                        projectInfo()
                     input("Tecle ENTER para continuar")
                     op3 = menuInfo()
             input("Tecle ENTER para continuar")
