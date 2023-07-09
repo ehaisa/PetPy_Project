@@ -1,6 +1,5 @@
 # TODAS AS FONTES SÃO MATERIAIS ONLINE NOS QUAIS EU USEI PARA ESTUDAR E CRIAR OS CÓDIGOS
 # Proximas ideias: fazer o CRUD dos preços, talvez fazer um CRUD para as informações do "Sobre nós"
-# Solicitações do professor: fazer a tela com identificação dos objetivos e do desenvolvedor e utilizar arquivos para armazenamento dos dados em memória secundária
 
 import os
 import platform
@@ -8,10 +7,10 @@ from datetime import datetime, time
 
 pets = {}
 
-system = platform.system()
+sistema = platform.system()
 
 def limpar_tela():  # Código retirado de um trabalho em trio que eu participei, da disciplina
-    if system == 'Windows':
+    if sistema == 'Windows':
         os.system('cls')
     else:
         os.system('clear')
@@ -111,31 +110,55 @@ def validarNumero():
         return contato
 
 def petCadastro(): # Inspirado no exemplo dado pelo professor Flavius
-    print("Informe os dados do seu pet:") # Fonte: https://replit.com/@flaviusgorgonio/ProjetoComFuncoes4py
+    limpar_tela()  # Fonte: https://replit.com/@flaviusgorgonio/ProjetoComFuncoes4py
+    print("Informe os dados do seu pet:")
     print()
     petNome = input("Qual o nome dele? ")
+    
+    limpar_tela()
     petTipo = input("Que animal ele é? ")
-    petIdade = input("Quantos anos ele tem? ")
-    petSaude = input("Ele tem alguma condição médica importante de lembrar, como alergias ou doenças? (sim/não)  ")
+
+    limpar_tela()
+    petIdade = int(input("Informe a idade dele (APENAS NÚMEROS): "))
+    petIdade = str(petIdade) + " anos"
+
+    limpar_tela()
+    petSaude = input("Ele tem alguma condição médica importante de lembrar, como alergias ou doenças? (sim/não)  ").lower()
     if petSaude.lower() == "sim":
         petCondicoes = input("Informe a(s) condição(ões) dele: ")
+        limpar_tela()
         print("Agora, para finalizar, informe alguns dados sobre você: ")
     else:
         petCondicoes = "Nenhuma"
+        limpar_tela()
         print("Agora, para finalizar, informe alguns dados sobre você:")
 
-    donoNome = input("Qual o seu nome? ")
-    donoEmail = validarEmail()
-    donoContato = validarNumero()
-
-    if donoEmail in pets: # O if para a possibilidade de uma pessoa ter multiplos pets foi desenvolvido com o auxílio do chatGPT
-        pets[donoEmail]["Pets"].append({
-        "Nome": petNome,
-        "Tipo": petTipo,
-        "Idade": petIdade,
-        "Condições Médicas": petCondicoes
-        })
+    checarConta = input("Você já tem uma conta? ").lower()
+    if checarConta == "sim":
+        limpar_tela()
+        donoEmail = validarEmail()
+        
+        if donoEmail in pets:
+            pets[donoEmail]["Pets"].append({
+            "Nome": petNome,
+            "Tipo": petTipo,
+            "Idade": petIdade,
+            "Condições Médicas": petCondicoes
+            })
+            print("Seja bem-vindo, ", petNome)
+        else:
+            print("Conta não encontrada.")
+    
     else:
+        limpar_tela()
+        donoNome = input("Qual o seu nome? ")
+
+        limpar_tela()
+        donoEmail = validarEmail()
+
+        limpar_tela()
+        donoContato = validarNumero()
+
         pets[donoEmail] = {
         "Dono": donoNome,
         "Email": donoEmail,
@@ -147,8 +170,8 @@ def petCadastro(): # Inspirado no exemplo dado pelo professor Flavius
             "Condições Médicas": petCondicoes
             }]
         }
-
-    print("Sejam bem-vindos %s e %s. "%(donoNome, petNome))
+        limpar_tela()
+        print("Sejam bem-vindos %s e %s. !"%(donoNome, petNome))
 
 def minhaConta():
         while True:
