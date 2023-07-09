@@ -145,7 +145,7 @@ def petCadastro(): # Inspirado no exemplo dado pelo professor Flavius
             "Idade": petIdade,
             "Condições Médicas": petCondicoes
             })
-            print("Seja bem-vindo, ", petNome)
+            print("Seja bem-vindo,", petNome)
         else:
             print("Conta não encontrada.")
     
@@ -171,7 +171,7 @@ def petCadastro(): # Inspirado no exemplo dado pelo professor Flavius
             }]
         }
         limpar_tela()
-        print("Sejam bem-vindos %s e %s. !"%(donoNome, petNome))
+        print("Sejam bem-vindos %s e %s!"%(donoNome, petNome))
 
 def minhaConta():
         while True:
@@ -190,6 +190,7 @@ def minhaConta():
                     print("Tipo: ", pet["Tipo"])
                     print("Idade: ", pet["Idade"])
                     print("Condições Médicas: ", pet["Condições Médicas"])
+                    print()
                 break
             else:
                 limpar_tela()
