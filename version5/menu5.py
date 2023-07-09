@@ -203,11 +203,7 @@ def minhaConta(): # Fonte: https://replit.com/@flaviusgorgonio/ProjetoComFuncoes
                 limpar_tela()
                 print("Perfil não encontrado! Certifique-se que o e-mail foi digitado corretamente.")
                 resp = input("Quer tentar novamente? (sim/não) ").lower()
-                
-                if resp == "sim":
-                    limpar_tela()
-                    minhaConta()
-                else:
+                if resp != "sim":
                     break
 
 def configConta(): # Inspirado no exemplo dado pelo professor Flavius
