@@ -124,7 +124,7 @@ def petCadastro(): # Inspirado no exemplo dado pelo professor Flavius
     petIdade = str(petIdade) + " anos"
 
     limpar_tela()
-    petSaude = input("Ele tem alguma condição médica importante de lembrar, como alergias ou doenças? (sim/não)  ").lower()
+    petSaude = input("Ele tem alguma condição médica importante de lembrar, como alergias ou doenças? (sim/não)  ")
     if petSaude.lower() == "sim":
         petCondicoes = input("Informe a(s) condição(ões) dele: ")
         limpar_tela()
@@ -134,8 +134,8 @@ def petCadastro(): # Inspirado no exemplo dado pelo professor Flavius
         limpar_tela()
         print("Agora, para finalizar, informe alguns dados sobre você:")
 
-    checarConta = input("Você já tem uma conta? ").lower()
-    if checarConta == "sim":
+    checarConta = input("Você já tem uma conta? ")
+    if checarConta.lower() == "sim":
         limpar_tela()
         donoEmail = validarEmail()
         
@@ -187,9 +187,12 @@ def minhaConta(): # Fonte: https://replit.com/@flaviusgorgonio/ProjetoComFuncoes
             limpar_tela()
 
             if donoEmail in pets:
+                limpar_tela()
+                print("================================")
                 dono = pets[donoEmail]
                 print("Dono: ", dono["Dono"])
                 print("Contato: ", dono["Contato"])
+                print()
                 print("Pets ")
                 for pet in dono["Pets"]:
                     print("Nome: ", pet["Nome"])
@@ -197,20 +200,38 @@ def minhaConta(): # Fonte: https://replit.com/@flaviusgorgonio/ProjetoComFuncoes
                     print("Idade: ", pet["Idade"])
                     print("Condições Médicas: ", pet["Condições Médicas"])
                     print()
+                print("================================")
                 break
             
             else:
                 limpar_tela()
                 print("Perfil não encontrado! Certifique-se que o e-mail foi digitado corretamente.")
-                resp = input("Quer tentar novamente? (sim/não) ").lower()
-                if resp != "sim":
+                resp = input("Quer tentar novamente? (sim/não) ")
+                if resp.lower() != "sim":
                     break
+
+def configMenu():
+    limpar_tela()
+    print("======== Editando Conta ========")
+    print()
+    print("\t1 - Nome")
+    print("\t2 - Tipo")
+    print("\t3 - Idade")
+    print("\t4 - Condições Médicas")
+    print("\t5 - Excluir perfil")
+    print("\t0 - Voltar ao Menu")
+    print()
+    print("================================")
+    opcao = input("Escolha a informação que deseja editar: ")
+    return opcao
 
 def configConta(): # Inspirado no exemplo dado pelo professor Flavius
     limpar_tela()  # Fonte: https://replit.com/@flaviusgorgonio/ProjetoComFuncoes4py
     donoEmail = input("Digite seu e-mail: ")
+    
     if donoEmail in pets:
         limpar_tela()
+
         dono = pets[donoEmail]
         print("== Perfis Encontrados nesta Conta == ")
         print("=====================================")
@@ -218,44 +239,57 @@ def configConta(): # Inspirado no exemplo dado pelo professor Flavius
         for i, pet in enumerate(dono["Pets"]): # Fonte: https://www.hashtagtreinamentos.com/enumerate-no-python?gad=1&gclid=CjwKCAjwzJmlBhBBEiwAEJyLuzyK3Dd003sj_0rW_2fw14-HSJVq_p1lA5hw1z7M7Sysg4d9kmG7_hoCEEsQAvD_BwE
             print(f"{i+1} - {pet['Nome']}")   # Fonte do formato: https://docs.python.org/pt-br/3/tutorial/inputoutput.html
         print()
-        print()
         print("=====================================")
         opcao = int(input("Escolha sua opção: "))
 
         animal = dono["Pets"]
         if 1 <= opcao <= len(dono): # Feito com auxílio do chatGPT
             petEditado = animal[opcao-1]
-            print("======== Editando Conta ========")
-            print()
-            print("\t1 - Nome")
-            print("\t2 - Tipo")
-            print("\t3 - Idade")
-            print("\t4 - Condições Médicas")
-            print("\t5 - Excluir conta")
-            print()
-            print("================================")
-            opcao = input("Escolha a informação que deseja editar: ") 
-            if opcao == "1":
-                novoNome = input("Qual o novo nome dele? ")
-                petEditado["Nome"] = novoNome
-                print("Nome atualizado com sucesso!")
-            elif opcao == "2":
-                novoTipo = input("Que animal ele é? ")
-                petEditado["Tipo"] = novoTipo
-                print("Tipo atualizado com sucesso!")
-            elif opcao == "3":
-                novaIdade = input("Quantos anos ele tem? ")
-                petEditado["Idade"] = novaIdade
-                print("Idade atualizada com sucesso!")
-            elif opcao == "4":
-                novasCondicoes = input("Digite as novas condições médicas: ")
-                petEditado["Condições Médicas"] = novasCondicoes
-                print("Condições médicas atualizadas com sucesso!")
-            elif opcao == "5":
-                dono["Pets"].remove(pet)
-                print("Perfil deletado com sucesso!")
-            else:
-                print("Opção inválida!")
+
+            opcao = configMenu()
+            while opcao != "0":
+                if opcao == "1":
+                    limpar_tela()
+                    print("Atualmente, o nome dele é: ",petEditado["Nome"])
+                    novoNome = input("Qual o novo nome dele? ")
+                    petEditado["Nome"] = novoNome
+                    print("Nome atualizado com sucesso!")
+                
+                elif opcao == "2":
+                    limpar_tela()
+                    print("Atualmente, ele é um ",petEditado["Tipo"])
+                    novoTipo = input("Que animal ele é? ")
+                    petEditado["Tipo"] = novoTipo
+                    print("Tipo atualizado com sucesso!")
+                
+                elif opcao == "3":
+                    limpar_tela()
+                    print("Atualmente, ele tem ",petEditado["Idade"])
+                    novaIdade = int(input("Quantos anos ele tem? "))
+                    novaIdade = str(novaIdade) + " anos"
+                    petEditado["Idade"] = novaIdade
+                    print("Idade atualizada com sucesso!")
+                
+                elif opcao == "4":
+                    limpar_tela()
+                    print("Atualmente, as condições dele são: ",petEditado["Condições Médicas"])
+                    novasCondicoes = input("Digite as novas condições médicas: ")
+                    petEditado["Condições Médicas"] = novasCondicoes
+                    print("Condições médicas atualizadas com sucesso!")
+                
+                elif opcao == "5":
+                    limpar_tela()
+                    print("AVISO! Essa ação é permanente!")
+                    resp = input("Você tem certeza que deseja excluir esse perfil? (sim/não) ").lower()
+                    if resp == "sim":
+                        dono["Pets"].remove(pet)
+                        print("Perfil deletado com sucesso!")
+                    else:
+                        print("Ufa! Essa foi por pouco...")
+            
+                else:
+                    print("Opção inválida!")
+                opcao = configMenu()
         else:
             print("Perfil não encontrado")
     else:
