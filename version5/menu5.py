@@ -100,13 +100,14 @@ def validarNumero():
     contato = contato.replace("-", "")
 
     if len(contato) != 11:
+        limpar_tela()
         print("Número inválido. Por favor, digite novamente.")
-        contato = input("Informe um número para contato: ")
+        validarNumero()
     elif contato[2] != "9":
+        limpar_tela()
         print("Número inválido. Por favor, digite novamente.")
-        contato = input("Informe um número para contato: ")
+        validarNumero()
     else:
-        print("O cadastro foi realizado com sucesso!")
         return contato
 
 def petCadastro(): # Inspirado no exemplo dado pelo professor Flavius
@@ -145,6 +146,8 @@ def petCadastro(): # Inspirado no exemplo dado pelo professor Flavius
             "Idade": petIdade,
             "Condições Médicas": petCondicoes
             })
+            limpar_tela()
+            print("O cadastro foi realizado com sucesso!")
             print("Seja bem-vindo,", petNome)
         else:
             print("Conta não encontrada.")
@@ -171,6 +174,7 @@ def petCadastro(): # Inspirado no exemplo dado pelo professor Flavius
             }]
         }
         limpar_tela()
+        print("O cadastro foi realizado com sucesso!")
         print("Sejam bem-vindos %s e %s!"%(donoNome, petNome))
 
 def minhaConta(): # Fonte: https://replit.com/@flaviusgorgonio/ProjetoComFuncoes4py
