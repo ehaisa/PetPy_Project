@@ -173,13 +173,15 @@ def petCadastro(): # Inspirado no exemplo dado pelo professor Flavius
         limpar_tela()
         print("Sejam bem-vindos %s e %s!"%(donoNome, petNome))
 
-def minhaConta():
+def minhaConta(): # Fonte: https://replit.com/@flaviusgorgonio/ProjetoComFuncoes4py
         while True:
             limpar_tela()
             print("=====================================")
             print("            Acessar Perfil           ")
             print("=====================================")
             donoEmail = input("Digite seu e-mail: ")
+            limpar_tela()
+
             if donoEmail in pets:
                 dono = pets[donoEmail]
                 print("Dono: ", dono["Dono"])
@@ -192,10 +194,12 @@ def minhaConta():
                     print("Condições Médicas: ", pet["Condições Médicas"])
                     print()
                 break
+            
             else:
                 limpar_tela()
                 print("Perfil não encontrado! Certifique-se que o e-mail foi digitado corretamente.")
                 resp = input("Quer tentar novamente? (sim/não) ").lower()
+                
                 if resp == "sim":
                     limpar_tela()
                     minhaConta()
@@ -213,6 +217,7 @@ def configConta(): # Inspirado no exemplo dado pelo professor Flavius
         print()
         for i, pet in enumerate(dono["Pets"]): # Fonte: https://www.hashtagtreinamentos.com/enumerate-no-python?gad=1&gclid=CjwKCAjwzJmlBhBBEiwAEJyLuzyK3Dd003sj_0rW_2fw14-HSJVq_p1lA5hw1z7M7Sysg4d9kmG7_hoCEEsQAvD_BwE
             print(f"{i+1} - {pet['Nome']}")   # Fonte do formato: https://docs.python.org/pt-br/3/tutorial/inputoutput.html
+        print()
         print()
         print("=====================================")
         opcao = int(input("Escolha sua opção: "))
