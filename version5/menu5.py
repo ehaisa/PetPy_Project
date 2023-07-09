@@ -701,13 +701,13 @@ def menuConfigAgenda():
     print("\t1 - Serviço")
     print("\t2 - Horário e Data")
     print("\t3 - Cancelar visita")
+    print("\t0 - Voltar o Menu")
     print()
     print("================================")
     opcao = input("Escolha a informação que deseja editar: ")
     return opcao
 
 def configAgenda(): # Fonte: https://replit.com/@flaviusgorgonio/ProjetoComFuncoes4py
-    limpar_tela()
     print("=====================================")
     print("             Agendamento             ")
     print("=====================================")
@@ -772,7 +772,7 @@ def configAgenda(): # Fonte: https://replit.com/@flaviusgorgonio/ProjetoComFunco
                     print("AVISO! Essa ação é permanente!")
                     resp = input("Você tem certeza que deseja cancelar essa visita? (sim/não) ")
                     if resp.lower() == "sim":
-                        donoAgenda.remove(pacienteNome)
+                        donoAgenda["Paciente"].remove(pacienteNome)
                         print("Visita cancelada.")
                         print("Seu agendamento foi retirado de nossos registros.")
                     else:
