@@ -1,11 +1,13 @@
 # TODAS AS FONTES SÃO MATERIAIS ONLINE NOS QUAIS EU USEI PARA ESTUDAR E CRIAR OS CÓDIGOS
-# Proximas ideias: fazer o CRUD dos preços, talvez fazer um CRUD para as informações do "Sobre nós"
 
 import os
 import platform
 from datetime import datetime, time
+import pickle
 
+donos = {}
 pets = {}
+agendamentos = {}
 
 sistema = platform.system()
 
@@ -110,6 +112,8 @@ def validarNumero():
     else:
         return contato
 
+##### CRUD ALUNOS #####
+
 def petCadastro(): # Inspirado no exemplo dado pelo professor Flavius
     limpar_tela()  # Fonte: https://replit.com/@flaviusgorgonio/ProjetoComFuncoes4py
     print("Informe os dados do seu pet:")
@@ -121,7 +125,7 @@ def petCadastro(): # Inspirado no exemplo dado pelo professor Flavius
 
     limpar_tela()
     petIdade = int(input("Informe a idade dele (APENAS NÚMEROS): "))
-    petIdade = str(petIdade) + " anos"
+    #petIdade = str(petIdade) + " anos"
 
     limpar_tela()
     petSaude = input("Ele tem alguma condição médica importante de lembrar, como alergias ou doenças? (sim/não)  ")
@@ -139,13 +143,14 @@ def petCadastro(): # Inspirado no exemplo dado pelo professor Flavius
         limpar_tela()
         donoEmail = validarEmail()
         
-        if donoEmail in pets:
-            pets[donoEmail]["Pets"].append({
-            "Nome": petNome,
-            "Tipo": petTipo,
-            "Idade": petIdade,
-            "Condições Médicas": petCondicoes
-            })
+        if donoEmail in donos:
+            idpet = len(petNome) + petIdade
+            
+            while idpet in pets:
+                idpet += 1
+            donos[donoEmail][2].append(idpet) # Corrijido com o auxílio do chatGPT
+            pets[idpet] = [petNome, petTipo, petIdade, petCondicoes]
+            
             limpar_tela()
             print("O cadastro foi realizado com sucesso!")
             print("Seja bem-vindo,", petNome)
@@ -162,17 +167,13 @@ def petCadastro(): # Inspirado no exemplo dado pelo professor Flavius
         limpar_tela()
         donoContato = validarNumero()
 
-        pets[donoEmail] = {
-        "Dono": donoNome,
-        "Email": donoEmail,
-        "Contato": donoContato,
-        "Pets": [{
-            "Nome": petNome,
-            "Tipo": petTipo,
-            "Idade": petIdade,
-            "Condições Médicas": petCondicoes
-            }]
-        }
+        idpet = len(petNome) + petIdade
+        while idpet in pets:
+            idpet += 1
+        pets[idpet] = [petNome, petTipo, petIdade, petCondicoes]
+        
+        donos[donoEmail] = [donoNome, donoContato, [idpet]]
+
         limpar_tela()
         print("O cadastro foi realizado com sucesso!")
         print("Sejam bem-vindos %s e %s!"%(donoNome, petNome))
@@ -186,20 +187,22 @@ def minhaConta(): # Fonte: https://replit.com/@flaviusgorgonio/ProjetoComFuncoes
             donoEmail = input("Digite seu e-mail: ")
             limpar_tela()
 
-            if donoEmail in pets:
+            if donoEmail in donos:
                 limpar_tela()
                 print("================================")
-                dono = pets[donoEmail]
-                print("Dono: ", dono["Dono"])
-                print("Contato: ", dono["Contato"])
+                dono = donos[donoEmail]
+                print("Dono: ", dono[0])
+                print("Contato: ", dono[1])
                 print()
                 print("Pets ")
-                for pet in dono["Pets"]:
-                    print("Nome: ", pet["Nome"])
-                    print("Tipo: ", pet["Tipo"])
-                    print("Idade: ", pet["Idade"])
-                    print("Condições Médicas: ", pet["Condições Médicas"])
-                    print()
+                for petID in dono[2]: # Corrijido com o auxílio do chatGPT
+                    if petID in pets:
+                        pet = pets[petID]
+                        print("Nome: ", pet[0])
+                        print("Tipo: ", pet[1])
+                        print("Idade: ", pet[2])
+                        print("Condições Médicas: ", pet[3])
+                print()
                 print("================================")
                 break
             
@@ -229,52 +232,52 @@ def configConta(): # Inspirado no exemplo dado pelo professor Flavius
     limpar_tela()  # Fonte: https://replit.com/@flaviusgorgonio/ProjetoComFuncoes4py
     donoEmail = input("Digite seu e-mail: ")
     
-    if donoEmail in pets:
+    if donoEmail in donos:
         limpar_tela()
 
-        dono = pets[donoEmail]
+        dono = donos[donoEmail]
         print("== Perfis Encontrados nesta Conta == ")
         print("=====================================")
         print()
-        for i, pet in enumerate(dono["Pets"]): # Fonte: https://www.hashtagtreinamentos.com/enumerate-no-python?gad=1&gclid=CjwKCAjwzJmlBhBBEiwAEJyLuzyK3Dd003sj_0rW_2fw14-HSJVq_p1lA5hw1z7M7Sysg4d9kmG7_hoCEEsQAvD_BwE
-            print(f"{i+1} - {pet['Nome']}")   # Fonte do formato: https://docs.python.org/pt-br/3/tutorial/inputoutput.html
+        for petID in dono[2]: # Corrijido com o auxílio do chatGPT
+            if petID in pets:
+                pet = pets[petID]
+                print(f"{petID} - {pet[0]}") # Fonte do formato: https://docs.python.org/pt-br/3/tutorial/inputoutput.html
         print()
         print("=====================================")
-        opcao = int(input("Escolha sua opção: "))
+        petEscolhido = int(input("Escolha sua opção: "))
 
-        animal = dono["Pets"]
-        if 1 <= opcao <= len(dono): # Feito com auxílio do chatGPT
-            petEditado = animal[opcao-1]
-
+        if petEscolhido == petID:
+            print(pet)
             opcao = configMenu()
             while opcao != "0":
                 if opcao == "1":
                     limpar_tela()
-                    print("Atualmente, o nome dele é: ",petEditado["Nome"])
+                    print("Atualmente, o nome dele é: ", pet[0])
                     novoNome = input("Qual o novo nome dele? ")
-                    petEditado["Nome"] = novoNome
+                    pet[0] = novoNome
                     print("Nome atualizado com sucesso!")
                 
                 elif opcao == "2":
                     limpar_tela()
-                    print("Atualmente, ele é um ",petEditado["Tipo"])
+                    print("Atualmente, ele é um ",pet[1])
                     novoTipo = input("Que animal ele é? ")
-                    petEditado["Tipo"] = novoTipo
+                    pet[1] = novoTipo
                     print("Tipo atualizado com sucesso!")
                 
                 elif opcao == "3":
                     limpar_tela()
-                    print("Atualmente, ele tem ",petEditado["Idade"])
+                    print("Atualmente, ele tem ",pet[2])
                     novaIdade = int(input("Quantos anos ele tem? "))
                     novaIdade = str(novaIdade) + " anos"
-                    petEditado["Idade"] = novaIdade
+                    pet[2] = novaIdade
                     print("Idade atualizada com sucesso!")
                 
                 elif opcao == "4":
                     limpar_tela()
-                    print("Atualmente, as condições dele são: ",petEditado["Condições Médicas"])
+                    print("Atualmente, as condições dele são: ",pet[3])
                     novasCondicoes = input("Digite as novas condições médicas: ")
-                    petEditado["Condições Médicas"] = novasCondicoes
+                    pet[3] = novasCondicoes
                     print("Condições médicas atualizadas com sucesso!")
                 
                 elif opcao == "5":
@@ -282,7 +285,8 @@ def configConta(): # Inspirado no exemplo dado pelo professor Flavius
                     print("AVISO! Essa ação é permanente!")
                     resp = input("Você tem certeza que deseja excluir esse perfil? (sim/não) ").lower()
                     if resp == "sim":
-                        dono["Pets"].remove(pet)
+                        del pets[petID]
+                        dono[2].remove(petID)
                         print("Perfil deletado com sucesso!")
                     else:
                         print("Ufa! Essa foi por pouco...")
@@ -294,6 +298,20 @@ def configConta(): # Inspirado no exemplo dado pelo professor Flavius
             print("Perfil não encontrado")
     else:
         print("Dono não encontrado.")
+
+def moduloCliente():
+    op2 = petPerfil()
+    while op2 != "0":
+        if op2 == "1":
+            minhaConta()
+        elif op2 == "2":
+            petCadastro()
+        elif op2 == "3":
+            configConta()
+        input("Tecle ENTER para continuar")
+        op2 = petPerfil()
+
+##################################################
 
 def menuBanho(): # Fonte: https://replit.com/@flaviusgorgonio/ProjetoComFuncoes4py
     limpar_tela()
@@ -571,7 +589,7 @@ def menuAgenda(): # Fonte: https://replit.com/@flaviusgorgonio/ProjetoComFuncoes
     opcao = input("Escolha sua opção: ")
     return opcao
 
-agendamentos = {}
+#### CRUD AGENDAMENTOS ####
 
 def clinicaHorarios(hora): # Feito com auxilio do chatGPT
     manhaAbre = time(7, 0)
@@ -832,20 +850,24 @@ def contatoInfo():
 
 ########## PROGRAMA PRINCIPAL ##########
 
+#### Arquivo dos clientes ####
+try:
+  arqAlunos = open("alunos.dat", "rb")
+  alunos = pickle.load(arqAlunos)
+  arqAlunos.close()
+except:
+  arqAlunos = open("alunos.dat", "wb")
+  arqAlunos.close()
+  alunos = {}
+
+#############################
+
+
 op1 = menuPrincipal()
 
 while op1 != "0":
     if op1 == "1":
-        op2 = petPerfil()
-        while op2 != "0":
-            if op2 == "1":
-                minhaConta()
-            elif op2 == "2":
-                petCadastro()
-            elif op2 == "3":
-                configConta()
-            input("Tecle ENTER para continuar")
-            op2 = petPerfil()
+        moduloCliente()
     elif op1 == "2":
         op2 = menuServicos()
         while op2 != "0":
