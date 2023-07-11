@@ -948,7 +948,7 @@ while op1 != "0":
         op2 = menuAtendimento()
         while op2 != "0":
             if op2 == "1":
-                moduloCliente()
+                moduloAgendas()
             elif op2 == "2":
                 op3 = menuInfo()
                 while op3 != "0":
