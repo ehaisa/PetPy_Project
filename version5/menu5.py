@@ -298,6 +298,10 @@ def configConta(): # Inspirado no exemplo dado pelo professor Flavius
             print("Perfil não encontrado")
     else:
         print("Dono não encontrado.")
+    
+    dados = {"donos": donos, "pets": pets}
+    with open("dados.dat", "wb") as arquivo:
+        pickle.dump(dados, arquivo)
 
 def moduloCliente():
     op2 = petPerfil()
@@ -515,12 +519,28 @@ def configAgenda(): # Fonte: https://replit.com/@flaviusgorgonio/ProjetoComFunco
                         print("Ufa! Essa foi por pouco...")
                 else:
                     print("Opção inválida.")
-                    
+
                 opcao = menuConfigAgenda()
         else:
             print("Agendamento não encontrado.")
     else:
         print("Nenhum agendamento foi encontrado nesse e-mail.")
+
+    agenda = {"agendas": agendas, "pacientes": pacientes}
+    with open("agendas.dat", "wb") as arquivo:
+        pickle.dump(agenda, arquivo)
+
+def moduloAgendas():
+    op3 = menuAgenda()
+    while op3 != "0":
+        if op3 == "1":
+            agendarHorario()
+        elif op3 == "2":
+            minhaAgenda()
+        elif op3 == "3":
+            configAgenda()
+        input("Tecle ENTER para continuar")
+        op3 = menuAgenda()
 
 ###########################################################################
 
@@ -928,16 +948,7 @@ while op1 != "0":
         op2 = menuAtendimento()
         while op2 != "0":
             if op2 == "1":
-                op3 = menuAgenda()
-                while op3 != "0":
-                    if op3 == "1":
-                        agendarHorario()
-                    elif op3 == "2":
-                        minhaAgenda()
-                    elif op3 == "3":
-                        configAgenda()
-                    input("Tecle ENTER para continuar")
-                    op3 = menuAgenda()
+                moduloCliente()
             elif op2 == "2":
                 op3 = menuInfo()
                 while op3 != "0":
