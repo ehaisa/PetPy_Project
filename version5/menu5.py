@@ -167,13 +167,13 @@ def petCadastro(): # Inspirado no exemplo dado pelo professor Flavius
             idpet += 1
         pets[idpet] = [petNome, petTipo, petIdade, petCondicoes]
         
-        donos[donoEmail] = [donoNome, donoContato, [idpet]]
+        donos[donoEmail] = [donoNome, donoContato, [idpet]] # Corrijido com o auxílio do chatGPT
 
         limpar_tela()
         print("O cadastro foi realizado com sucesso!")
         print("Sejam bem-vindos %s e %s!"%(donoNome, petNome))
 
-    dados = {"donos": donos, "pets": pets}
+    dados = {"donos": donos, "pets": pets} # Corrijido com o auxílio do chatGPT
     with open("dados.dat", "wb") as arquivo:
         pickle.dump(dados, arquivo)
 
@@ -519,7 +519,8 @@ def configAgenda(): # Fonte: https://replit.com/@flaviusgorgonio/ProjetoComFunco
                         print("Ufa! Essa foi por pouco...")
                 else:
                     print("Opção inválida.")
-
+                
+                input("Tecle ENTER para continuar.")
                 opcao = menuConfigAgenda()
         else:
             print("Agendamento não encontrado.")
